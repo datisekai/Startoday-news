@@ -38,7 +38,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await axios.get(
-    "http://localhost:6060/co-ban/chi-tiet?id=lenh-kham-xet-giup-fbi-dot-kich-dinh-thu-ong-trump-4497523"
+    "http://localhost:3000/api/hello?id=lenh-kham-xet-giup-fbi-dot-kich-dinh-thu-ong-trump-4497523"
   );
   return {
     props: {
