@@ -37,10 +37,12 @@ const Home: NextPage = ({ data }: any) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const data = await axios.get(
-  //   "https://startoday-news.vercel.app/api/hello?id=lenh-kham-xet-giup-fbi-dot-kich-dinh-thu-ong-trump-4497523"
-  // );
+  const data = await axios.get(
+    "https://startoday123.herokuapp.com/co-ban/chi-tiet?id=ong-nguyen-van-nen-cach-lam-bong-da-o-tp-hcm-dang-nua-voi-4498472"
+  );
   return {
-    props: {},
+    props: {
+      data: data.data.data,
+    },
   };
 };
