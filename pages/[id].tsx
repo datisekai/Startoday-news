@@ -15,7 +15,7 @@ export default NewsDetail;
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
   const data = await axios.get(
-    `http://localhost:6060/co-ban/chi-tiet?id=${id}`
+    `https://startoday123.herokuapp.com/co-ban/chi-tiet?id=${id}`
   );
 
   //https://startoday123.herokuapp.com
