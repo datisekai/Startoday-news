@@ -38,8 +38,10 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await axios.get(
-    "https://startoday123.herokuapp.com/co-ban/chi-tiet?id=ong-nguyen-van-nen-cach-lam-bong-da-o-tp-hcm-dang-nua-voi-4498472"
+    "http://localhost:6060/co-ban/chi-tiet?id=ong-nguyen-van-nen-cach-lam-bong-da-o-tp-hcm-dang-nua-voi-4498472"
   );
+
+  //https://startoday123.herokuapp.com
   return {
     props: {
       data: data.data.data,
