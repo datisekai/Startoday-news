@@ -3,6 +3,7 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { API_URL } from "../src/config";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = ({ data }: any) => {
@@ -38,7 +39,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await axios.get(
-    "https://startoday123.herokuapp.com/co-ban/chi-tiet?id=ong-nguyen-van-nen-cach-lam-bong-da-o-tp-hcm-dang-nua-voi-4498472"
+    `${API_URL}/co-ban/chi-tiet?id=ong-nguyen-van-nen-cach-lam-bong-da-o-tp-hcm-dang-nua-voi-4498472`
   );
 
   //https://startoday123.herokuapp.com

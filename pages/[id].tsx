@@ -1,6 +1,7 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
+import { API_URL } from "../src/config";
 
 const NewsDetail = ({ data }: any) => {
   return (
@@ -14,9 +15,7 @@ export default NewsDetail;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
-  const data = await axios.get(
-    `https://startoday123.herokuapp.com/co-ban/chi-tiet?id=${id}`
-  );
+  const data = await axios.get(`${API_URL}/co-ban/chi-tiet?id=${id}`);
 
   //https://startoday123.herokuapp.com
   return {
