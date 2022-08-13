@@ -4,7 +4,13 @@ import NextNProgress from "nextjs-progressbar";
 import ThemeLayout from "../src/layouts/ThemeLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
