@@ -26,3 +26,7 @@ body{
 .lazy{
   aspect-ratio: 440/264;
 }
+
+img{
+  width: 100%;
+}
