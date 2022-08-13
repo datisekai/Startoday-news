@@ -38,9 +38,8 @@ const NewsDetail = ({ data }: any) => {
           </Grid>
           <Grid item xs={12} md={4}>
             {data.recommends.map((item: NewsBaseItem, index: number) => (
-              <Box pl={2}>
-                {" "}
-                <CardNews key={index} {...item} />
+              <Box pl={2} key={index}>
+                <CardNews {...item} />
               </Box>
             ))}
           </Grid>

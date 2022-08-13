@@ -49,7 +49,6 @@ const Home: NextPage<HomeProps> = ({ chinhTri }) => {
             <Grid container spacing={2} mt={1}>
               {chinhTri.map((item: NewsBaseItem, index: number) => {
                 if (index > 0 && index <= chinhTri.length / 2 + 3) {
-                  console.log(item.href);
                   return (
                     <Grid item key={index} xs={12} md={4}>
                       <CardNewsChild {...item} />

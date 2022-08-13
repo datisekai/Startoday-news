@@ -2,7 +2,7 @@ import { Grid, Pagination, Typography } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import slugify from "slugify";
 import baseAPI from "../../src/actions/base";
 import categoryAPI from "../../src/actions/category";
@@ -13,6 +13,7 @@ import MainLayout from "../../src/layouts/MainLayout";
 import CategoryItem from "../../src/models/CategoryItem";
 import NewsBaseItem from "../../src/models/NewsBaseItem";
 import { secondary } from "../../src/theme/themeColors";
+import handleOnTop from "../../src/utils/handleOnTop";
 
 const DanhMuc = ({ data }: any) => {
   const router = useRouter();
@@ -20,6 +21,10 @@ const DanhMuc = ({ data }: any) => {
   const categories: any = queryClient.getQueryData(["danh-muc"]);
 
   const { id } = router.query;
+
+  useEffect(() => {
+    handleOnTop();
+  }, [id]);
 
   const title = useMemo(() => {
     let initial = "Thời sự";
@@ -33,7 +38,7 @@ const DanhMuc = ({ data }: any) => {
       }
     }
     return initial;
-  }, [id]);
+  }, [id, categories]);
 
   return (
     <>

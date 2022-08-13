@@ -51,6 +51,7 @@ const CardNews: FC<NewsBaseItem> = ({ description, href, images, title }) => {
           <Image
             src={images}
             width='440px'
+            alt={title}
             height={"264px"}
             className='imagesBig'
           />
