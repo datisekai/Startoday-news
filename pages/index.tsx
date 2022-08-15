@@ -16,15 +16,11 @@ import NewsBaseItem from "../src/models/NewsBaseItem";
 import { secondary } from "../src/theme/themeColors";
 import styles from "../styles/Home.module.css";
 
-interface HomeProps {
-  chinhTri: NewsBaseItem[];
-}
-
-const Home: NextPage<HomeProps> = ({ chinhTri }) => {
+const Home: NextPage = () => {
   return (
     <>
       <MainLayout>
-        <Grid container px={2} py={3} spacing={2}>
+        {/* <Grid container px={2} py={3} spacing={2}>
           <Grid item xs={12} md={12} lg={8}>
             <Typography
               fontSize={22}
@@ -79,7 +75,8 @@ const Home: NextPage<HomeProps> = ({ chinhTri }) => {
           count={10}
           color='secondary'
           shape='rounded'
-        />
+        /> */}
+        Home
       </MainLayout>
     </>
   );
@@ -88,13 +85,11 @@ const Home: NextPage<HomeProps> = ({ chinhTri }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const dataChinhTri = await baseAPI.getData("thoi-su/chinh-tri");
+  // const dataChinhTri = await baseAPI.getData("thoi-su/chinh-tri");
 
   //https://startoday123.herokuapp.com
   return {
-    props: {
-      chinhTri: dataChinhTri,
-    },
+    props: {},
     revalidate: 60,
   };
 };

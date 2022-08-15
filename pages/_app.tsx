@@ -3,6 +3,10 @@ import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import ThemeLayout from "../src/layouts/ThemeLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import { persistor, store } from "../src/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +27,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <ThemeLayout>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Component {...pageProps} />
+              <Toaster />
+            </PersistGate>
+          </Provider>
         </QueryClientProvider>
       </ThemeLayout>
     </>

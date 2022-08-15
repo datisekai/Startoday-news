@@ -23,7 +23,7 @@ const NewsDetail = () => {
 
   return (
     <MainLayout>
-      <Grid container spacing={2} pb={4}>
+      {/* <Grid container spacing={2} pb={4}>
         <Grid item xs={12} md={8}>
           {!isLoading && (
             <Box px={2} pl={{ md: 5, xs: 2 }}>
@@ -70,7 +70,7 @@ const NewsDetail = () => {
             </Box>
           )}
         </Grid>
-      </Grid>
+      </Grid> */}
     </MainLayout>
   );
 };

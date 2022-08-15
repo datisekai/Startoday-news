@@ -16,34 +16,34 @@ import { secondary } from "../../src/theme/themeColors";
 import handleOnTop from "../../src/utils/handleOnTop";
 
 const DanhMuc = ({ data }: any) => {
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  const categories: any = queryClient.getQueryData(["danh-muc"]);
+  // const router = useRouter();
+  // const queryClient = useQueryClient();
+  // const categories: any = queryClient.getQueryData(["danh-muc"]);
 
-  const { id } = router.query;
+  // const { id } = router.query;
 
-  useEffect(() => {
-    handleOnTop();
-  }, [id]);
+  // useEffect(() => {
+  //   handleOnTop();
+  // }, [id]);
 
-  const title = useMemo(() => {
-    let initial = "Thời sự";
-    if (categories) {
-      const currentCategory = categories.data.data.find(
-        (item: CategoryItem, index: number) =>
-          slugify(item.name.toLowerCase()) === id
-      );
-      if (currentCategory) {
-        initial = currentCategory.name;
-      }
-    }
-    return initial;
-  }, [id, categories]);
+  // const title = useMemo(() => {
+  //   let initial = "Thời sự";
+  //   if (categories) {
+  //     const currentCategory = categories.data.data.find(
+  //       (item: CategoryItem, index: number) =>
+  //         slugify(item.name.toLowerCase()) === id
+  //     );
+  //     if (currentCategory) {
+  //       initial = currentCategory.name;
+  //     }
+  //   }
+  //   return initial;
+  // }, [id, categories]);
 
   return (
     <>
       <MainLayout>
-        <Grid container px={2} py={3} spacing={2}>
+        {/* <Grid container px={2} py={3} spacing={2}>
           <Grid item xs={12} md={12} lg={8}>
             <Typography
               fontSize={22}
@@ -99,7 +99,8 @@ const DanhMuc = ({ data }: any) => {
           count={10}
           color='secondary'
           shape='rounded'
-        />
+        /> */}
+        Detail
       </MainLayout>
     </>
   );
@@ -108,35 +109,33 @@ const DanhMuc = ({ data }: any) => {
 export default DanhMuc;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let data: any;
-  const slug = params?.id as string;
-  switch (slug) {
-    case "thoi-su":
-      data = await baseAPI.getData("thoi-su/chinh-tri");
-      break;
-    case "the-gioi":
-      data = await baseAPI.getData("the-gioi/tu-lieu");
-      break;
-    case "kinh-doanh":
-      data = await baseAPI.getData("kinh-doanh/quoc-te");
-      break;
-    case "khoa-hoc":
-      data = await baseAPI.getData("khoa-hoc/tin-tuc");
-      break;
-    case "giai-tri":
-      data = await baseAPI.getData("giai-tri/gioi-sao");
-      break;
-    case "the-thao":
-      data = await baseAPI.getData("bong-da");
-      break;
-    default:
-      data = await baseAPI.getData("thoi-su/chinh-tri");
-      break;
-  }
+  // let data: any;
+  // const slug = params?.id as string;
+  // switch (slug) {
+  //   case "thoi-su":
+  //     data = await baseAPI.getData("thoi-su/chinh-tri");
+  //     break;
+  //   case "the-gioi":
+  //     data = await baseAPI.getData("the-gioi/tu-lieu");
+  //     break;
+  //   case "kinh-doanh":
+  //     data = await baseAPI.getData("kinh-doanh/quoc-te");
+  //     break;
+  //   case "khoa-hoc":
+  //     data = await baseAPI.getData("khoa-hoc/tin-tuc");
+  //     break;
+  //   case "giai-tri":
+  //     data = await baseAPI.getData("giai-tri/gioi-sao");
+  //     break;
+  //   case "the-thao":
+  //     data = await baseAPI.getData("bong-da");
+  //     break;
+  //   default:
+  //     data = await baseAPI.getData("thoi-su/chinh-tri");
+  //     break;
+  // }
   return {
-    props: {
-      data: data,
-    },
+    props: {},
     revalidate: 60,
   };
 };
