@@ -16,7 +16,7 @@ const SidebarItem: FC<SideBarProps> = ({ url, label, icon }) => {
   const { pathname } = router;
 
   const active = useMemo(() => {
-    const currentRoute = pathname.split("/")[2] || "/";
+    const currentRoute = pathname.split("/")[2] || "";
     return url === `/${currentRoute}` ? true : false;
   }, [pathname]);
 

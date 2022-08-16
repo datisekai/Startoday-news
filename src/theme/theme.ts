@@ -15,18 +15,18 @@ import {
 const fontSize = 14;
 
 const fontFamily = [
-  "Open Sans",
+  // "Open Sans",
   "Roboto",
-  "-apple-system",
-  "BlinkMacSystemFont",
-  "Segoe UI",
-  "Oxygen",
-  "Ubuntu",
-  "Cantarell",
-  "Fira Sans",
-  "Droid Sans",
-  "Helvetica Neue",
-  "sans-serif",
+  // "-apple-system",
+  // "BlinkMacSystemFont",
+  // "Segoe UI",
+  // "Oxygen",
+  // "Ubuntu",
+  // "Cantarell",
+  // "Fira Sans",
+  // "Droid Sans",
+  // "Helvetica Neue",
+  // "sans-serif",
 ].join(",");
 
 const customTheme = createTheme({

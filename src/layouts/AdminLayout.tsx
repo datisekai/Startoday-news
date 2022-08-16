@@ -1,13 +1,29 @@
 import { Box } from "@mui/material";
-import React, { FC, useState } from "react";
+import { useRouter } from "next/router";
+import React, { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import FlexBox from "../components/FlexBox";
 import HeaderAdmin from "../components/HeaderAdmin";
+import Spinner from "../components/Loading/Spinner";
 import SidebarAdmin from "../components/SidebarAdmin";
 import Props from "../models/Props";
+import { RootState } from "../redux/store";
 import { primary } from "../theme/themeColors";
 
 const AdminLayout: FC<Props> = ({ children }) => {
   const [display, setDisplay] = useState(false);
+  const { token, user } = useSelector((state: RootState) => state.Auth);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!token || !user) {
+      router.push("/dang-nhap");
+    }
+  }, [token, user]);
+
+  if (!token || !user) {
+    return <Spinner />;
+  }
 
   const handleDisplay = (value: boolean) => {
     setDisplay(value);
