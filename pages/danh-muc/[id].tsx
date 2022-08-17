@@ -1,19 +1,7 @@
-import { Grid, Pagination, Typography } from "@mui/material";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import React, { useEffect, useMemo } from "react";
 import slugify from "slugify";
-import baseAPI from "../../src/actions/base";
 import categoryAPI from "../../src/actions/category";
-import CardNews from "../../src/components/Card/CardNews";
-import CardNewsBig from "../../src/components/Card/CardNewsBig";
-import CardNewsChild from "../../src/components/Card/CardNewsChild";
 import MainLayout from "../../src/layouts/MainLayout";
-import CategoryItem from "../../src/models/CategoryItem";
-import NewsBaseItem from "../../src/models/NewsBaseItem";
-import { secondary } from "../../src/theme/themeColors";
-import handleOnTop from "../../src/utils/handleOnTop";
 
 const DanhMuc = ({ data }: any) => {
   // const router = useRouter();
@@ -43,6 +31,7 @@ const DanhMuc = ({ data }: any) => {
   return (
     <>
       <MainLayout>
+        abc
         {/* <Grid container px={2} py={3} spacing={2}>
           <Grid item xs={12} md={12} lg={8}>
             <Typography
@@ -140,17 +129,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const categories = await categoryAPI.getCategory();
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const categories = await categoryAPI.getCategory();
 
-  const paths = categories
-    ? categories.data.data.map((item: CategoryItem, index: number) => ({
-        params: { id: slugify(item.name.toLowerCase()) },
-      }))
-    : [];
+// const paths = categories
+//   ? categories.data.data.map((item: CategoryItem, index: number) => ({
+//       params: { id: slugify(item.name.toLowerCase()) },
+//     }))
+//   : [];
 
-  return {
-    paths: paths,
-    fallback: "blocking", // can also be true or 'blocking'
-  };
-};
+//   return {
+//     paths: paths,
+//     fallback: "blocking", // can also be true or 'blocking'
+//   };
+// };
