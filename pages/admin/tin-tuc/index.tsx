@@ -1,6 +1,6 @@
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FlexBox from "../../../src/components/FlexBox";
 import MDataGrid from "../../../src/components/MDataGrid";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -8,14 +8,29 @@ import AdminLayout from "../../../src/layouts/AdminLayout";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useQuery } from "@tanstack/react-query";
+import newsAPI from "../../../src/actions/news";
+import TinTucItem from "../../../src/models/TinTucItem";
 
 const TinTuc = () => {
   const [rows, setRows] = useState([]);
   const [selected, setSelected] = useState([]);
 
+  const { data, isLoading } = useQuery(["tin-tuc"], newsAPI.getNews);
+
   const handleSetSelected = (data: any) => {
     setSelected(data);
   };
+
+  useEffect(() => {
+    if (data) {
+      const newRows = data.map((item: TinTucItem) => ({
+        ...item,
+        id: item._id,
+      }));
+      setRows(newRows);
+    }
+  }, [data]);
 
   const columns = [
     { field: "id", headerName: "URL", width: 200 },
@@ -28,7 +43,7 @@ const TinTuc = () => {
         <LazyLoadImage
           height={"100%"}
           src={cellValues.row.avatar}
-          width={"100%"}
+          style={{ borderRadius: "5px" }}
         />
       ),
     },

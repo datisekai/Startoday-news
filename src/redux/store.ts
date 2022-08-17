@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import AuthSlice from "./slices/AuthSlice";
+import CkSlice from "./slices/CkSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   Auth: AuthSlice,
+  CKEditor: CkSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 
