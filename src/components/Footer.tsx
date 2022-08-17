@@ -1,14 +1,10 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
-import CategoryItem from "../models/CategoryItem";
-import { primary } from "../theme/themeColors";
-import EmailIcon from "@mui/icons-material/Email";
 import ApprovalIcon from "@mui/icons-material/Approval";
-import Link from "next/link";
-import slugify from "slugify";
+import EmailIcon from "@mui/icons-material/Email";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useQuery } from "@tanstack/react-query";
 import categoryAPI from "../actions/category";
+import { primary } from "../theme/themeColors";
 
 const Footer = () => {
   const { data, isLoading } = useQuery(["danh-muc"], categoryAPI.getCategory);
@@ -29,8 +25,8 @@ const Footer = () => {
               },
             }}
           >
-            {data &&
-              data.data.data.map((item: CategoryItem, index: number) => (
+            {/* {data &&
+              data.map((item: CategoryItem, index: number) => (
                 <Grid item xs={6} md={3} key={index}>
                   <Link href={`/danh-muc/${slugify(item.name)}`}>
                     <Button
@@ -45,7 +41,7 @@ const Footer = () => {
                     </Button>
                   </Link>
                 </Grid>
-              ))}
+              ))} */}
           </Grid>
         </Grid>
         <Grid
