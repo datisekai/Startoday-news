@@ -3,7 +3,7 @@ import slugify from "slugify";
 import categoryAPI from "../../src/actions/category";
 import MainLayout from "../../src/layouts/MainLayout";
 
-const DanhMuc = ({ data }: any) => {
+const DanhMuc = () => {
   // const router = useRouter();
   // const queryClient = useQueryClient();
   // const categories: any = queryClient.getQueryData(["danh-muc"]);
@@ -96,50 +96,3 @@ const DanhMuc = ({ data }: any) => {
 };
 
 export default DanhMuc;
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // let data: any;
-  // const slug = params?.id as string;
-  // switch (slug) {
-  //   case "thoi-su":
-  //     data = await baseAPI.getData("thoi-su/chinh-tri");
-  //     break;
-  //   case "the-gioi":
-  //     data = await baseAPI.getData("the-gioi/tu-lieu");
-  //     break;
-  //   case "kinh-doanh":
-  //     data = await baseAPI.getData("kinh-doanh/quoc-te");
-  //     break;
-  //   case "khoa-hoc":
-  //     data = await baseAPI.getData("khoa-hoc/tin-tuc");
-  //     break;
-  //   case "giai-tri":
-  //     data = await baseAPI.getData("giai-tri/gioi-sao");
-  //     break;
-  //   case "the-thao":
-  //     data = await baseAPI.getData("bong-da");
-  //     break;
-  //   default:
-  //     data = await baseAPI.getData("thoi-su/chinh-tri");
-  //     break;
-  // }
-  return {
-    props: {},
-    revalidate: 60,
-  };
-};
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const categories = await categoryAPI.getCategory();
-
-// const paths = categories
-//   ? categories.data.data.map((item: CategoryItem, index: number) => ({
-//       params: { id: slugify(item.name.toLowerCase()) },
-//     }))
-//   : [];
-
-//   return {
-//     paths: paths,
-//     fallback: "blocking", // can also be true or 'blocking'
-//   };
-// };
