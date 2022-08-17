@@ -9,9 +9,7 @@ import FlexBox from "../../../src/components/FlexBox";
 import RenderForm from "../../../src/components/RenderForm";
 import AdminLayout from "../../../src/layouts/AdminLayout";
 import DanhMucItem from "../../../src/models/DanhMucItem";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CloudinaryUnsigned } from "puff-puff/CKEditor";
+import CkEditor from "../../../src/components/CkEditor";
 
 const XuLyTinTuc = () => {
   const router = useRouter();
@@ -83,19 +81,6 @@ const XuLyTinTuc = () => {
     },
   ];
 
-  function imagePluginFactory(editor: any) {
-    editor.plugins.get("FileRepository").createUploadAdapter = (
-      loader: any
-    ) => {
-      return new CloudinaryUnsigned(
-        loader,
-        "do8rqqyn4",
-        "qmpupf7a",
-        [160, 500, 1000, 1052]
-      );
-    };
-  }
-
   console.log(html);
 
   return (
@@ -115,22 +100,7 @@ const XuLyTinTuc = () => {
         })}
 
         <Grid item xs={12}>
-          <CKEditor
-            editor={ClassicEditor}
-            config={{
-              extraPlugins: [imagePluginFactory],
-              outerHeight: 500,
-            }}
-            data='<p>Hello from CKEditor 5!</p>'
-            onReady={(editor: any) => {
-              // You can store the "editor" and use when it is needed.
-              console.log("Editor is ready to use!", editor);
-            }}
-            onChange={(event: any, editor: any) => {
-              const data = editor.getData();
-              setHtml(data);
-            }}
-          />
+          <CkEditor />
         </Grid>
         <Grid item xs={12}>
           {slug === "them" ? (
