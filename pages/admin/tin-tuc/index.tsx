@@ -8,12 +8,15 @@ import AdminLayout from "../../../src/layouts/AdminLayout";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import newsAPI from "../../../src/actions/news";
 import TinTucItem from "../../../src/models/TinTucItem";
+import toast from "react-hot-toast";
+import { confirmAlert } from "react-confirm-alert";
 
 const TinTuc = () => {
   const [rows, setRows] = useState([]);
+  const queryClient = useQueryClient();
   const [selected, setSelected] = useState([]);
 
   const { data, isLoading } = useQuery(["tin-tuc"], newsAPI.getNews);
@@ -26,7 +29,7 @@ const TinTuc = () => {
     if (data) {
       const newRows = data.map((item: TinTucItem) => ({
         ...item,
-        id: item._id,
+        id: item.slug,
       }));
       setRows(newRows);
     }
@@ -48,14 +51,22 @@ const TinTuc = () => {
       ),
     },
     {
+      field: "category",
+      headerName: "Danh mục",
+      width: 200,
+      renderCell: (cellValues: any) => (
+        <Typography>{cellValues.row.category.name}</Typography>
+      ),
+    },
+    {
       field: "createdAt",
       headerName: "Ngày tạo",
-      width: 200,
+      width: 150,
     },
     {
       field: "updatedAt",
       headerName: "Ngày update",
-      width: 200,
+      width: 150,
     },
     {
       field: "actions",
@@ -63,23 +74,67 @@ const TinTuc = () => {
       width: 200,
       renderCell: (cellValues: any) => {
         return (
-          <Stack spacing={0.5} direction='row' alignItems={"center"}>
-            <IconButton>
-              <VisibilityIcon />
-            </IconButton>
+          <Stack spacing={0} direction='row' alignItems={"center"}>
+            <Link href={`/${cellValues.row.slug}`}>
+              <IconButton>
+                <VisibilityIcon />
+              </IconButton>
+            </Link>
             <Link href={`/admin/tin-tuc/${cellValues.row.slug}`}>
               <IconButton>
                 <DriveFileRenameOutlineIcon />
               </IconButton>
             </Link>
-            <DeleteIcon>
-              <VisibilityIcon />
-            </DeleteIcon>
+            <IconButton onClick={() => handleDeleteNews(cellValues.row._id)}>
+              <DeleteIcon />
+            </IconButton>
           </Stack>
         );
       },
     },
   ];
+
+  const { mutate: deleteNews, isLoading: loadingDelete } = useMutation(
+    newsAPI.deleteNews,
+    {
+      onSuccess: (result: any, variable) => {
+        const _idWasDelete = result.map((item: any) => item.data.data._id);
+        let newNews = data;
+        _idWasDelete.forEach((item: string) => {
+          newNews = newNews?.filter(
+            (element: TinTucItem) => element._id !== item
+          );
+        });
+
+        queryClient.setQueryData(["tin-tuc"], newNews);
+        toast.success("Xóa thành công!");
+      },
+      onError: (err: any) => {
+        console.log(err);
+        toast.error(err?.message);
+      },
+    }
+  );
+
+  const handleDeleteNews = (_id: string) => {
+    if (!_id) {
+      return toast.error("Chọn tin cần xóa");
+    }
+
+    confirmAlert({
+      title: `Thông báo`,
+      message: "Bạn có chắc chắn muốn xóa?",
+      buttons: [
+        {
+          label: "Đồng ý",
+          onClick: () => deleteNews([_id]),
+        },
+        {
+          label: "Hủy",
+        },
+      ],
+    });
+  };
 
   return (
     <AdminLayout>

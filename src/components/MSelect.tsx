@@ -45,6 +45,12 @@ const MSelect: FC<SelectProps> = ({
                   {
                     bgcolor: primary[100],
                   },
+                ".css-9q7mxj": {
+                  bgcolor: primary[100],
+                },
+                ".css-1mdkrrn.css-1mdkrrn.css-1mdkrrn": {
+                  bgcolor: primary[100],
+                },
               }}
             >
               <MenuItem value={""}>Chọn loại</MenuItem>

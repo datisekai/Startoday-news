@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,8 @@ import MDataGrid from "../../../src/components/MDataGrid";
 import AdminLayout from "../../../src/layouts/AdminLayout";
 import NguoiDungItem from "../../../src/models/NguoiDungItem";
 import { confirmAlert } from "react-confirm-alert";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const NguoiDung = () => {
   const queryClient = useQueryClient();
@@ -92,17 +94,13 @@ const NguoiDung = () => {
         return (
           <Stack spacing={0.5} direction='row' alignItems={"center"}>
             <Link href={`/admin/nguoi-dung/${cellValues.id}`}>
-              <Button variant='contained' color='warning'>
-                Cập nhật
-              </Button>
+              <IconButton>
+                <DriveFileRenameOutlineIcon />
+              </IconButton>
             </Link>
-            <Button
-              onClick={() => handleDeleteUsers(cellValues.id)}
-              variant='contained'
-              color='error'
-            >
-              Xóa
-            </Button>
+            <IconButton onClick={() => handleDeleteUsers(cellValues.id)}>
+              <DeleteIcon />
+            </IconButton>
           </Stack>
         );
       },

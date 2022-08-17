@@ -18,6 +18,9 @@ const RenderForm = ({ data, control, errors }: any) => {
             ".css-1wvp7yn-MuiInputBase-input-MuiOutlinedInput-input": {
               backgroundColor: primary[100],
             },
+            ".css-9q7mxj": {
+              bgcolor: primary[100],
+            },
           }}
         />
       ) : data.type === "select" ? (

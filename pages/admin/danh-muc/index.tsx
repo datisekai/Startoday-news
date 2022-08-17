@@ -1,7 +1,7 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import toast from "react-hot-toast";
 import categoryAPI from "../../../src/actions/category";
@@ -100,13 +100,9 @@ const DanhMucAdmin = () => {
                 Cập nhật
               </Button>
             </Link> */}
-            <Button
-              onClick={() => handleDeleteCategory(cellValues.id)}
-              variant='contained'
-              color='error'
-            >
-              Xóa
-            </Button>
+            <IconButton onClick={() => handleDeleteCategory(cellValues.id)}>
+              <DeleteIcon />
+            </IconButton>
           </Stack>
         );
       },

@@ -186,7 +186,7 @@ export const getDesignTokens = (mode: any) => ({
           secondary,
           error,
           info: {
-            main: "#fff",
+            main: "#666",
           },
           warning,
           success,

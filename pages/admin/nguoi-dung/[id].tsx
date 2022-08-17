@@ -111,10 +111,19 @@ const XuLyNguoiDung = () => {
       },
     },
     {
-      type: "switch",
-      label: "Trạng thái",
+      type: "select",
       name: "status",
-      rules: {},
+      label: "Trạng thái",
+      rules: {
+        required: {
+          value: true,
+          message: "Bắt buộc",
+        },
+      },
+      data: [
+        { value: true, text: "Hoạt động" },
+        { value: false, text: "Bị khóa" },
+      ],
     },
   ];
 
