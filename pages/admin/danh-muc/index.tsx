@@ -2,44 +2,46 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import toast from "react-hot-toast";
-import userAPI from "../../../src/actions/users";
+import categoryAPI from "../../../src/actions/category";
 import FlexBox from "../../../src/components/FlexBox";
+import FormCategory from "../../../src/components/Form/FormCategory";
 import MDataGrid from "../../../src/components/MDataGrid";
 import AdminLayout from "../../../src/layouts/AdminLayout";
-import NguoiDungItem from "../../../src/models/NguoiDungItem";
-import { confirmAlert } from "react-confirm-alert";
+import DanhMucItem from "../../../src/models/DanhMucItem";
 
-const NguoiDung = () => {
+const DanhMucAdmin = () => {
   const queryClient = useQueryClient();
-  const [selected, setSelected] = useState<any>([]);
   const [rows, setRows] = useState<any>([]);
+  const [selected, setSelected] = useState([]);
+  const [open, setOpen] = useState(false);
 
-  const { data, isLoading } = useQuery(["nguoi-dung"], userAPI.getUsers);
-
-  const handleSetSelected = (data: any) => {
-    setSelected(data);
-  };
+  const { data, isLoading } = useQuery(["danh-muc"], categoryAPI.getCategory);
 
   useEffect(() => {
     if (data) {
-      setRows(data.map((item: NguoiDungItem) => ({ ...item, id: item._id })));
+      const categoriesRows = data.map((item: DanhMucItem) => ({
+        ...item,
+        id: item._id,
+      }));
+      setRows(categoriesRows);
     }
   }, [data]);
 
-  const { mutate: deleteUser, isLoading: loadingDelete } = useMutation(
-    userAPI.deleteUser,
+  const { mutate: deleteCategory, isLoading: loadingDelete } = useMutation(
+    categoryAPI.deleteCategory,
     {
       onSuccess: (result: any, variable) => {
         const _idWasDelete = result.map((item: any) => item.data.data._id);
-        let newUsers = data;
+        let newCategories = data;
         _idWasDelete.forEach((item: string) => {
-          newUsers = newUsers?.filter(
-            (element: NguoiDungItem) => element._id !== item
+          newCategories = newCategories?.filter(
+            (element: DanhMucItem) => element._id !== item
           );
         });
 
-        queryClient.setQueryData(["nguoi-dung"], newUsers);
+        queryClient.setQueryData(["danh-muc"], newCategories);
         toast.success("Xóa thành công!");
       },
       onError: (err: any) => {
@@ -49,9 +51,9 @@ const NguoiDung = () => {
     }
   );
 
-  const handleDeleteUsers = (_id: string) => {
+  const handleDeleteCategory = (_id: string) => {
     if (!_id) {
-      return toast.error("Chọn người dùng cần xóa");
+      return toast.error("Chọn danh mục cần xóa");
     }
 
     confirmAlert({
@@ -60,7 +62,7 @@ const NguoiDung = () => {
       buttons: [
         {
           label: "Đồng ý",
-          onClick: () => deleteUser([_id]),
+          onClick: () => deleteCategory([_id]),
         },
         {
           label: "Hủy",
@@ -71,18 +73,20 @@ const NguoiDung = () => {
 
   const columns = [
     { field: "id", headerName: "ID", width: 200 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "password", headerName: "Mật khẩu", width: 200 },
-    { field: "role", headerName: "Mã quyền", width: 200 },
+    { field: "name", headerName: "Tên danh mục", width: 200 },
+    { field: "slug", headerName: "Slug", width: 200 },
     {
-      field: "status",
-      headerName: "Trạng thái",
+      field: "parentId",
+      headerName: "Danh mục lớn",
       width: 200,
-      renderCell: (cellValues: any) => {
-        return (
-          <Typography>{cellValues.value ? "Hoạt động" : "Bị khóa"}</Typography>
-        );
-      },
+      renderCell: (cellValues: any) => (
+        <Typography>{cellValues.row.parentId || "Chưa có"}</Typography>
+      ),
+    },
+    {
+      field: "createdAt",
+      headerName: "Ngày tạo",
+      width: 200,
     },
     {
       field: "actions",
@@ -91,13 +95,13 @@ const NguoiDung = () => {
       renderCell: (cellValues: any) => {
         return (
           <Stack spacing={0.5} direction='row' alignItems={"center"}>
-            <Link href={`/admin/nguoi-dung/${cellValues.id}`}>
+            {/* <Link href={`/admin/danh-muc/${cellValues.id}`}>
               <Button variant='contained' color='warning'>
                 Cập nhật
               </Button>
-            </Link>
+            </Link> */}
             <Button
-              onClick={() => handleDeleteUsers(cellValues.id)}
+              onClick={() => handleDeleteCategory(cellValues.id)}
               variant='contained'
               color='error'
             >
@@ -108,17 +112,24 @@ const NguoiDung = () => {
       },
     },
   ];
+
+  const handleSetSelected = (data: any) => {
+    setSelected(data);
+  };
+
   return (
     <AdminLayout>
       <FlexBox justifyContent={"space-between"} alignItems='center' mt={2}>
         <Typography fontWeight={500} fontSize={18}>
-          Quản lý người dùng
+          Quản lý danh mục
         </Typography>
-        <Link href='/admin/nguoi-dung/them'>
-          <Button variant='contained' color='secondary'>
-            Thêm người dùng
-          </Button>
-        </Link>
+        <Button
+          onClick={() => setOpen(true)}
+          variant='contained'
+          color='secondary'
+        >
+          Thêm danh mục
+        </Button>
       </FlexBox>
       <Box mt={5}>
         <MDataGrid
@@ -128,8 +139,13 @@ const NguoiDung = () => {
           loading={isLoading}
         />
       </Box>
+      <FormCategory
+        open={open}
+        handleClickOpen={() => setOpen(true)}
+        handleClose={() => setOpen(false)}
+      />
     </AdminLayout>
   );
 };
 
-export default NguoiDung;
+export default DanhMucAdmin;

@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import slugify from "slugify";
 import categoryAPI from "../actions/category";
-import CategoryItem from "../models/CategoryItem";
 import { primary } from "../theme/themeColors";
 import FlexBox from "./FlexBox";
 
@@ -46,7 +45,7 @@ const Categories = () => {
           options
         ).format(date)}, ${date.getFullYear()}`}</Typography>
       </Box>
-      <Stack direction={"row"} pl={2} flexWrap='wrap'>
+      {/* <Stack direction={"row"} pl={2} flexWrap='wrap'>
         {data &&
           data.data.data.map((item: CategoryItem, index: number) => (
             <Link
@@ -69,7 +68,7 @@ const Categories = () => {
               </Button>
             </Link>
           ))}
-      </Stack>
+      </Stack> */}
     </FlexBox>
   );
 };

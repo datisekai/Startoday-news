@@ -14,6 +14,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import userAPI from "../../../src/actions/users";
 import NguoiDungItem from "../../../src/models/NguoiDungItem";
 import toast from "react-hot-toast";
+import RenderForm from "../../../src/components/RenderForm";
 
 const XuLyNguoiDung = () => {
   const queryClient = useQueryClient();
@@ -45,7 +46,7 @@ const XuLyNguoiDung = () => {
 
   useEffect(() => {
     if (id !== "them" && data) {
-      const currentUser: NguoiDungItem = data.data.data;
+      const currentUser: NguoiDungItem = data;
       setValue("email", currentUser.email);
       setValue("password", currentUser.password);
       setValue("role", currentUser.role);
@@ -121,10 +122,7 @@ const XuLyNguoiDung = () => {
     userAPI.addUser,
     {
       onSuccess: (result) => {
-        queryClient.setQueriesData(["nguoi-dung"], {
-          ...users,
-          data: { ...users.data, data: [...users.data.data, result.data.data] },
-        });
+        queryClient.setQueriesData(["nguoi-dung"], [...users, result]);
 
         toast("Thêm thành công!", {
           icon: "👏",
@@ -146,18 +144,14 @@ const XuLyNguoiDung = () => {
     userAPI.updateUser,
     {
       onSuccess: (result) => {
-        const newUsers = users.data.data.map((item: NguoiDungItem) => {
+        const newUsers = users.map((item: NguoiDungItem) => {
           if (item._id === id.toString()) {
-            return { ...result.data.data };
+            return { ...result };
           }
           return item;
         });
 
-        console.log(newUsers);
-        queryClient.setQueriesData(["nguoi-dung"], {
-          ...users,
-          data: { ...users.data, data: newUsers },
-        });
+        queryClient.setQueriesData(["nguoi-dung"], newUsers);
         toast("Cập nhật thành công!", {
           icon: "👏",
         });
@@ -182,53 +176,20 @@ const XuLyNguoiDung = () => {
           {id !== "them" ? "Cập nhật người dùng" : "Thêm người dùng"}
         </Typography>
       </FlexBox>
-      <Grid container spacing={2} mt={5} sx={{ maxWidth: 500 }}>
+      <Grid
+        container
+        rowSpacing={2}
+        mt={5}
+        sx={{ maxWidth: 500, mx: "auto", width: "100%" }}
+      >
         {forms.map((item: any, index: number) => {
-          const render = () => {
-            if (item.type === "textfield") {
-              return (
-                <MTextField
-                  control={control}
-                  error={errors}
-                  label={item.label}
-                  name={item.name}
-                  rules={item.rules}
-                  customSx={{
-                    ".css-1wvp7yn-MuiInputBase-input-MuiOutlinedInput-input": {
-                      backgroundColor: primary[100],
-                    },
-                  }}
-                />
-              );
-            } else if (item.type === "select") {
-              return (
-                <MSelect
-                  control={control}
-                  data={item.data}
-                  error={errors}
-                  label={item.label}
-                  name={item.name}
-                  rules={item.rules}
-                />
-              );
-            } else if (item.type === "switch") {
-              return (
-                <MSwitch
-                  control={control}
-                  error={errors}
-                  label={item.label}
-                  name={item.name}
-                />
-              );
-            }
-          };
           return (
             <Grid item xs={12} md={12} key={index}>
-              {render()}
+              <RenderForm data={item} control={control} errors={errors} />
             </Grid>
           );
         })}
-        <Grid item xs={12} pl={2}>
+        <Grid item xs={12}>
           {id === "them" ? (
             <LoadingButton
               loading={loadingAdd}
@@ -242,7 +203,7 @@ const XuLyNguoiDung = () => {
             </LoadingButton>
           ) : (
             <LoadingButton
-              loading={false}
+              loading={loadingUpdate}
               fullWidth
               type='submit'
               color='secondary'

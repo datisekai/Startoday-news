@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { persistor, store } from "../src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

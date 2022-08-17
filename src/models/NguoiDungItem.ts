@@ -5,5 +5,5 @@ export default interface NguoiDungItem {
   status: boolean;
   createdAt?: string;
   updatedAt?: string;
-  _id: string;
+  _id?: string;
 }
