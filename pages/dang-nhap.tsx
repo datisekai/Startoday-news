@@ -17,6 +17,8 @@ import { setAuth } from "../src/redux/slices/AuthSlice";
 import { useRouter } from "next/router";
 import { RootState } from "../src/redux/store";
 import Spinner from "../src/components/Loading/Spinner";
+import Title from "../src/components/Title";
+import Meta from "../src/components/Meta";
 
 const DangNhap = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -78,114 +80,122 @@ const DangNhap = () => {
   }
 
   return (
-    <FlexBox
-      alignItems={"center"}
-      justifyContent='center'
-      minHeight={"100vh"}
-      bgcolor={primary[200]}
-    >
-      <Box width={{ sm: 500, xs: "90%" }}>
-        <Typography fontWeight={600} textAlign='center' mb={2} fontSize={20}>
-          Wellcome to StarToday!
-        </Typography>
-        <Box
-          sx={{
-            bgcolor: primary[100],
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            borderRadius: "10px",
-          }}
-        >
-          <Typography
-            sx={{
-              bgcolor: primary[900],
-              width: "100%",
-              boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-              color: primary[200],
-              borderTopLeftRadius: "10px",
-              borderTopRightRadius: "10px",
-              p: 1,
-            }}
-            textAlign='center'
-          >
-            Not a member?{" "}
-            <Button variant='text' color='info'>
-              Sign up now
-            </Button>
+    <>
+      <Meta
+        title='Startoday - Đăng nhập'
+        description='Đăng nhập'
+        image='https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
+      />
+      <Title title='Startoday - Đăng nhập' />
+      <FlexBox
+        alignItems={"center"}
+        justifyContent='center'
+        minHeight={"100vh"}
+        bgcolor={primary[200]}
+      >
+        <Box width={{ sm: 500, xs: "90%" }}>
+          <Typography fontWeight={600} textAlign='center' mb={2} fontSize={20}>
+            Wellcome to StarToday!
           </Typography>
-          <form onSubmit={handleSubmit(handleLogin)}>
-            <Stack spacing={1} mt={2} px={5} py={3}>
-              <MTextField
-                control={control}
-                error={errors}
-                label={"Email"}
-                name={"email"}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Bắt buộc",
-                  },
-                  pattern: {
-                    value:
-                      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: "Email không đúng định dạng",
-                  },
-                }}
-                inputProps={{
-                  endAdornment: (
-                    <InputAdornment position='start'>@</InputAdornment>
-                  ),
-                }}
-                customSx={customTextField}
-              />
-              <MTextField
-                name='password'
-                control={control}
-                error={errors}
-                label='Mật khẩu'
-                type={showPassword ? "text" : "password"}
-                inputProps={{
-                  endAdornment: (
-                    <InputAdornment position='start'>
-                      <IconButton
-                        size='small'
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? (
-                          <VisibilityOff fontSize='small' />
-                        ) : (
-                          <Visibility fontSize='small' />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Bắt buộc",
-                  },
-                  minLength: {
-                    value: 4,
-                    message: "Không được dưới 4 kí tự",
-                  },
-                }}
-                customSx={customTextField}
-              />
-              <LoadingButton
-                loading={isLoading}
-                type='submit'
-                color='secondary'
-                variant='contained'
-                startIcon={<VpnKeyIcon />}
-                onClick={handleSubmit(handleLogin)}
-              >
-                Đăng nhập
-              </LoadingButton>
-            </Stack>
-          </form>
+          <Box
+            sx={{
+              bgcolor: primary[100],
+              boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+              borderRadius: "10px",
+            }}
+          >
+            <Typography
+              sx={{
+                bgcolor: primary[900],
+                width: "100%",
+                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                color: primary[200],
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                p: 1,
+              }}
+              textAlign='center'
+            >
+              Not a member?{" "}
+              <Button variant='text' color='info'>
+                Sign up now
+              </Button>
+            </Typography>
+            <form onSubmit={handleSubmit(handleLogin)}>
+              <Stack spacing={1} mt={2} px={5} py={3}>
+                <MTextField
+                  control={control}
+                  error={errors}
+                  label={"Email"}
+                  name={"email"}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Bắt buộc",
+                    },
+                    pattern: {
+                      value:
+                        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message: "Email không đúng định dạng",
+                    },
+                  }}
+                  inputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>@</InputAdornment>
+                    ),
+                  }}
+                  customSx={customTextField}
+                />
+                <MTextField
+                  name='password'
+                  control={control}
+                  error={errors}
+                  label='Mật khẩu'
+                  type={showPassword ? "text" : "password"}
+                  inputProps={{
+                    endAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton
+                          size='small'
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <VisibilityOff fontSize='small' />
+                          ) : (
+                            <Visibility fontSize='small' />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Bắt buộc",
+                    },
+                    minLength: {
+                      value: 4,
+                      message: "Không được dưới 4 kí tự",
+                    },
+                  }}
+                  customSx={customTextField}
+                />
+                <LoadingButton
+                  loading={isLoading}
+                  type='submit'
+                  color='secondary'
+                  variant='contained'
+                  startIcon={<VpnKeyIcon />}
+                  onClick={handleSubmit(handleLogin)}
+                >
+                  Đăng nhập
+                </LoadingButton>
+              </Stack>
+            </form>
+          </Box>
         </Box>
-      </Box>
-    </FlexBox>
+      </FlexBox>
+    </>
   );
 };
 

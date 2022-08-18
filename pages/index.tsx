@@ -3,9 +3,11 @@ import type { GetStaticProps, NextPage } from "next";
 import { useMemo } from "react";
 import categoryAPI from "../src/actions/category";
 import newsAPI from "../src/actions/news";
+import Meta from "../src/components/Meta";
 import Section1 from "../src/components/sections/Section1";
 import Section2 from "../src/components/sections/Section2";
 import Section3 from "../src/components/sections/Section3";
+import Title from "../src/components/Title";
 import MainLayout from "../src/layouts/MainLayout";
 import WidthLayout from "../src/layouts/WidthLayout";
 import DanhMucItem from "../src/models/DanhMucItem";
@@ -62,7 +64,13 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
 
   return (
     <>
+      <Meta
+        description='Thông tin nhanh và chính xác được cập nhật hàng giờ. Đọc báo tin tức online Việt Nam'
+        image='https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
+        title='Startoday - Báo tiếng Việt nhiều người xem nhất'
+      />
       <MainLayout>
+        <Title title='Startodat - Báo tiếng Việt nhiều người xem nhất' />
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />

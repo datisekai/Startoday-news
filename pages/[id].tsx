@@ -1,11 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import newsAPI from "../src/actions/news";
+import Meta from "../src/components/Meta";
 import Section4 from "../src/components/sections/Section4";
+import Title from "../src/components/Title";
 import MainLayout from "../src/layouts/MainLayout";
-import WidthLayout from "../src/layouts/WidthLayout";
 import WidthLayout2 from "../src/layouts/WidthLayout2";
 import TinTucItem from "../src/models/TinTucItem";
 
@@ -16,44 +17,55 @@ interface NewsDetailProps {
 
 const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
   return (
-    <MainLayout>
-      <WidthLayout2>
-        <Stack spacing={2}>
-          <Stack justifyContent={"space-between"} direction='row'>
-            <Typography
-              color='primary.600'
-              fontSize={16}
-              textTransform='capitalize'
-              fontWeight={300}
-            >
-              {data.category.name}
+    <>
+      <Meta
+        image={
+          data.avatar ||
+          "https://images.unsplash.com/photo-1586339949216-35c2747cc36d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+        }
+        description={data.description}
+        title={data.title}
+      />
+      <MainLayout>
+        <Title title={data.title} />
+        <WidthLayout2>
+          <Stack spacing={2}>
+            <Stack justifyContent={"space-between"} direction='row'>
+              <Typography
+                color='primary.600'
+                fontSize={16}
+                textTransform='capitalize'
+                fontWeight={300}
+              >
+                {data.category.name}
+              </Typography>
+              <Typography
+                color='primary.600'
+                fontSize={16}
+                textTransform='capitalize'
+                fontWeight={300}
+              >
+                {dayjs(data.createdAt).format("MMMM D, YYYY")}
+              </Typography>
+            </Stack>
+            <Typography fontWeight={500} fontSize={{ md: 28, xs: 24 }}>
+              {data.title}
             </Typography>
-            <Typography
-              color='primary.600'
-              fontSize={16}
-              textTransform='capitalize'
-              fontWeight={300}
-            >
-              {dayjs(data.createdAt).format("MMMM D, YYYY")}
+            <Typography sx={{ lineHeight: 2, fontSize: 18 }}>
+              {data.description}
             </Typography>
+            <Box sx={{ lineHeight: 2, fontSize: 18 }}>
+              <div dangerouslySetInnerHTML={{ __html: data.html }}></div>
+            </Box>
+            <Box>
+              <Section4 data={similars} />
+            </Box>
           </Stack>
-          <Typography fontWeight={500} fontSize={{ md: 28, xs: 24 }}>
-            {data.title}
-          </Typography>
-          <Typography sx={{ lineHeight: 2, fontSize: 18 }}>
-            {data.description}
-          </Typography>
-          <Box sx={{ lineHeight: 2, fontSize: 18 }}>
-            <div dangerouslySetInnerHTML={{ __html: data.html }}></div>
-          </Box>
-          <Box>
-            <Section4 data={similars} />
-          </Box>
-        </Stack>
 
-        <Box pb={10}></Box>
-      </WidthLayout2>
-    </MainLayout>
+          <Box pb={10}></Box>
+        </WidthLayout2>
+      </MainLayout>
+    </>
   );
 };
 
