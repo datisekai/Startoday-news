@@ -24,7 +24,7 @@ const CardSection2: FC<TinTucItem> = ({
   return (
     <Card>
       <Link href={`/${slug}`}>
-        <Stack spacing={1}>
+        <Stack spacing={1} sx={{ cursor: "pointer" }}>
           <LazyLoadImage
             alt={title}
             height={"100%"}

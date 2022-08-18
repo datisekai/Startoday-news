@@ -34,59 +34,61 @@ const CardSection1Big: FC<TinTucItem> = ({
           aspectRatio: "390/240",
         }}
       />
-      <Stack
-        spacing={1}
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          background:
-            "linear-gradient(90deg,#202125,rgba(32,33,37,0) 50%,#202125)",
-          p: 3,
-          cursor: "pointer",
-        }}
-      >
-        <Stack spacing={3} direction='row'>
-          <Link href={`/danh-muc/${category.slug}`}>
+      <Link href={`/${slug}`}>
+        <Stack
+          spacing={1}
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            background:
+              "linear-gradient(90deg,#202125,rgba(32,33,37,0) 50%,#202125)",
+            p: 3,
+            cursor: "pointer",
+          }}
+        >
+          <Stack spacing={3} direction='row'>
+            <Link href={`/danh-muc/${category.slug}`}>
+              <Typography
+                color='primary.200'
+                fontSize={16}
+                textTransform='capitalize'
+                fontWeight={300}
+              >
+                {category.name}
+              </Typography>
+            </Link>
             <Typography
               color='primary.200'
               fontSize={16}
               textTransform='capitalize'
               fontWeight={300}
             >
-              {category.name}
+              {dayjs(createdAt).format("MMMM D, YYYY")}
+            </Typography>
+          </Stack>
+          <Link href={`/${slug}`}>
+            <Typography
+              color='primary.100'
+              fontWeight={500}
+              fontSize={{ md: 22, xs: 18 }}
+              sx={styleLineClamp(2)}
+            >
+              {title}
             </Typography>
           </Link>
-          <Typography
-            color='primary.200'
-            fontSize={16}
-            textTransform='capitalize'
-            fontWeight={300}
-          >
-            {dayjs(createdAt).format("MMMM D, YYYY")}
-          </Typography>
+          <Link href={`/${slug}`}>
+            <Typography
+              color='primary.200'
+              fontWeight={300}
+              fontSize={16}
+              sx={styleLineClamp(2)}
+            >
+              {description}
+            </Typography>
+          </Link>
         </Stack>
-        <Link href={`/${slug}`}>
-          <Typography
-            color='primary.100'
-            fontWeight={500}
-            fontSize={{ md: 22, xs: 18 }}
-            sx={styleLineClamp(2)}
-          >
-            {title}
-          </Typography>
-        </Link>
-        <Link href={`/${slug}`}>
-          <Typography
-            color='primary.200'
-            fontWeight={300}
-            fontSize={16}
-            sx={styleLineClamp(2)}
-          >
-            {description}
-          </Typography>
-        </Link>
-      </Stack>
+      </Link>
     </Card>
   );
 };
