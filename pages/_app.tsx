@@ -29,10 +29,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeLayout>
         <QueryClientProvider client={queryClient}>
           <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <Component {...pageProps} />
-              <Toaster />
-            </PersistGate>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
+            <Component {...pageProps} />
+            <Toaster />
+            {/* </PersistGate> */}
           </Provider>
         </QueryClientProvider>
       </ThemeLayout>

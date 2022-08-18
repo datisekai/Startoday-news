@@ -18,10 +18,12 @@ const AuthSlice = createSlice({
       const { token, user } = action.payload;
       state.token = token;
       state.user = user;
+      localStorage.setItem("info", JSON.stringify({ token, user }));
     },
     clearAuth: (state) => {
       state.token = "";
       state.user = undefined;
+      localStorage.removeItem("info");
     },
   },
 });

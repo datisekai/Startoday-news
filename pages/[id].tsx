@@ -1,7 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import newsAPI from "../src/actions/news";
 import Meta from "../src/components/Meta";
 import Section4 from "../src/components/sections/Section4";
@@ -16,6 +17,12 @@ interface NewsDetailProps {
 }
 
 const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
+  useEffect(() => {
+    const increase = async () => {
+      const res = await newsAPI.increaseView(data.slug || "");
+    };
+    increase();
+  }, []);
   return (
     <>
       <Meta

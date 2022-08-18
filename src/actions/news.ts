@@ -31,6 +31,10 @@ const newsAPI = {
     const res = await axiosClient.get(`/tin-tuc/similar/${id}`);
     return res.data.data;
   },
+  increaseView: async (slug: string) => {
+    const res = await axiosClient.get(`/tin-tuc/view/increase?slug=${slug}`);
+    return res.data.data;
+  },
 };
 
 export default newsAPI;

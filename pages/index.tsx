@@ -70,7 +70,7 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
         title='Startoday - Báo tiếng Việt nhiều người xem nhất'
       />
       <MainLayout>
-        <Title title='Startodat - Báo tiếng Việt nhiều người xem nhất' />
+        <Title title='Startoday - Báo tiếng Việt nhiều người xem nhất' />
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />

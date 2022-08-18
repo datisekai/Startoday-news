@@ -1,18 +1,29 @@
 import { Box } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FlexBox from "../components/FlexBox";
 import HeaderAdmin from "../components/HeaderAdmin";
+import { IsBrowser } from "../components/IsBrowser";
 import Spinner from "../components/Loading/Spinner";
 import SidebarAdmin from "../components/SidebarAdmin";
 import Props from "../models/Props";
+import { setAuth } from "../redux/slices/AuthSlice";
 import { RootState } from "../redux/store";
 import { primary } from "../theme/themeColors";
 
 const AdminLayout: FC<Props> = ({ children }) => {
   const [display, setDisplay] = useState(false);
   const { token, user } = useSelector((state: RootState) => state.Auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage && localStorage.getItem("info")) {
+      const info = JSON.parse(localStorage.getItem("info") || "");
+      dispatch(setAuth(info));
+    }
+  }, []);
+
   const router = useRouter();
 
   useEffect(() => {
