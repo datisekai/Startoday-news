@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import FlexBox from "./FlexBox";
 import MenuIcon from "@mui/icons-material/Menu";
 import WidthLayout from "../layouts/WidthLayout";
@@ -8,8 +8,10 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Link from "next/link";
+import MDrawer from "./MDrawer";
 
 const Header = () => {
+  const [navbar, setNavbar] = useState(false);
   return (
     <Box
       sx={{
@@ -29,6 +31,7 @@ const Header = () => {
             color='inherit'
             aria-label='menu'
             sx={{ mr: 2 }}
+            onClick={() => setNavbar(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -86,6 +89,7 @@ const Header = () => {
           </Link>
         </Stack>
       </FlexBox>
+      <MDrawer open={navbar} handleClose={() => setNavbar(false)} />
     </Box>
   );
 };

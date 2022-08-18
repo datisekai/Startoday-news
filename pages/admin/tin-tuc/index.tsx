@@ -13,6 +13,7 @@ import newsAPI from "../../../src/actions/news";
 import TinTucItem from "../../../src/models/TinTucItem";
 import toast from "react-hot-toast";
 import { confirmAlert } from "react-confirm-alert";
+import dayjs from "dayjs";
 
 const TinTuc = () => {
   const [rows, setRows] = useState([]);
@@ -70,11 +71,21 @@ const TinTuc = () => {
       field: "createdAt",
       headerName: "Ngày tạo",
       width: 150,
+      renderCell: (cellValues: any) => (
+        <Typography>
+          {dayjs(cellValues.row.createdAt).format("DD/MM/YYYY")}
+        </Typography>
+      ),
     },
     {
       field: "updatedAt",
       headerName: "Ngày update",
       width: 150,
+      renderCell: (cellValues: any) => (
+        <Typography>
+          {dayjs(cellValues.row.updatedAt).format("DD/MM/YYYY")}
+        </Typography>
+      ),
     },
     {
       field: "actions",

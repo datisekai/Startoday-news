@@ -18,9 +18,15 @@ const AdminLayout: FC<Props> = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage && localStorage.getItem("info")) {
+    if (
+      typeof window !== "undefined" &&
+      localStorage &&
+      localStorage.getItem("info")
+    ) {
       const info = JSON.parse(localStorage.getItem("info") || "");
-      dispatch(setAuth(info));
+      if (!token || !user) {
+        dispatch(setAuth(info));
+      }
     }
   }, []);
 
