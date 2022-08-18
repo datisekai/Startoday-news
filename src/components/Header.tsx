@@ -75,20 +75,15 @@ const Header = () => {
             },
           }}
         >
-          <Button
-            variant='contained'
-            color='primary'
-            startIcon={<PersonOutlineIcon />}
-          >
-            Đăng nhập
-          </Button>
-          <Button
-            variant='contained'
-            sx={{ border: `1px solid ${primary[200]}` }}
-            color='info'
-          >
-            Đăng ký
-          </Button>
+          <Link href='/dang-nhap'>
+            <Button
+              variant='contained'
+              color='primary'
+              startIcon={<PersonOutlineIcon />}
+            >
+              Đăng nhập
+            </Button>
+          </Link>
         </Stack>
       </FlexBox>
     </Box>

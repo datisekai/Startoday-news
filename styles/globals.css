@@ -27,7 +27,9 @@ body{
   aspect-ratio: 440/264;
 }
 
-
+.image img{
+  width: 100% !important;
+}
 
 .layout{
   height: 650px;

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import slugify from "slugify";
 import categoryAPI from "../actions/category";
+import DanhMucItem from "../models/DanhMucItem";
 import { primary } from "../theme/themeColors";
 import FlexBox from "./FlexBox";
 
@@ -16,7 +17,7 @@ const Categories = () => {
 
   const router = useRouter();
 
-  const { id = "thoi-su" } = router.query;
+  const { id } = router.query;
 
   const { data, isLoading } = useQuery(["danh-muc"], categoryAPI.getCategory);
 
@@ -45,21 +46,28 @@ const Categories = () => {
           options
         ).format(date)}, ${date.getFullYear()}`}</Typography>
       </Box>
-      {/* <Stack direction={"row"} pl={2} flexWrap='wrap'>
+      <Stack direction={"row"} pl={2} flexWrap='wrap'>
+        <Link href={`/`}>
+          <Button
+            size='large'
+            variant='text'
+            sx={{
+              color: !id ? primary.main : primary[500],
+              fontWeight: "500",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Tất cả
+          </Button>
+        </Link>
         {data &&
-          data.data.data.map((item: CategoryItem, index: number) => (
-            <Link
-              key={index}
-              href={`/danh-muc/${slugify(item.name.toLowerCase())}`}
-            >
+          data.map((item: DanhMucItem, index: number) => (
+            <Link key={index} href={`/danh-muc/${item.slug}`}>
               <Button
                 size='large'
                 variant='text'
                 sx={{
-                  color:
-                    id === slugify(item.name.toLowerCase())
-                      ? primary.main
-                      : primary[200],
+                  color: id === item.slug ? primary.main : primary[500],
                   fontWeight: "500",
                   whiteSpace: "nowrap",
                 }}
@@ -68,7 +76,7 @@ const Categories = () => {
               </Button>
             </Link>
           ))}
-      </Stack> */}
+      </Stack>
     </FlexBox>
   );
 };

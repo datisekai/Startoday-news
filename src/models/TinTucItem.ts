@@ -5,10 +5,11 @@ export default interface TinTucItem {
   title: string;
   description: string;
   html: string;
-  category: string;
+  category: any;
   status: boolean;
   view: number;
   _id?: string;
   createdAt?: string;
   updatedAt?: string;
+  similars?: any;
 }

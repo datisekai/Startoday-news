@@ -27,6 +27,10 @@ const newsAPI = {
     const res = await axiosClient.put("/tin-tuc", data);
     return res.data.data;
   },
+  getSimilarNews: async (id: string) => {
+    const res = await axiosClient.get(`/tin-tuc/similar/${id}`);
+    return res.data.data;
+  },
 };
 
 export default newsAPI;

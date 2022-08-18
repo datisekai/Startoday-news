@@ -53,9 +53,17 @@ const TinTuc = () => {
     {
       field: "category",
       headerName: "Danh mục",
-      width: 200,
+      width: 150,
       renderCell: (cellValues: any) => (
         <Typography>{cellValues.row.category.name}</Typography>
+      ),
+    },
+    {
+      field: "status",
+      headerName: "Trạng thái",
+      width: 100,
+      renderCell: (cellValues: any) => (
+        <Typography>{cellValues.row.status ? "Hiển thị" : "Ẩn"}</Typography>
       ),
     },
     {

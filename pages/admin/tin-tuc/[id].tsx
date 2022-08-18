@@ -16,12 +16,6 @@ const XuLyTinTuc = () => {
     categoryAPI.getCategory
   );
 
-  const { data, isLoading } = useQuery([`chi-tiet-news`, id], () => {
-    if (id) {
-      return newsAPI.getDetailNews(id.toString());
-    }
-  });
-
   const CkEditor = dynamic(() => import("../../../src/components/CkEditor"), {
     ssr: false,
   });
@@ -53,12 +47,7 @@ const XuLyTinTuc = () => {
       type: "select",
       name: "status",
       label: "Hiển thị",
-      rules: {
-        required: {
-          value: true,
-          message: "Bắt buộc",
-        },
-      },
+      rules: {},
       data: [
         { value: true, text: "Hiển thị" },
         { value: false, text: "Ẩn" },
@@ -91,7 +80,7 @@ const XuLyTinTuc = () => {
         </Typography>
       </FlexBox>
 
-      <CkEditor id={id} forms={forms} data={data} />
+      <CkEditor id={id} forms={forms} />
     </AdminLayout>
   );
 };

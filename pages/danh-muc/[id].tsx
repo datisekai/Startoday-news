@@ -1,98 +1,69 @@
+import { Box } from "@mui/material";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { FC, useMemo } from "react";
 import slugify from "slugify";
 import categoryAPI from "../../src/actions/category";
+import newsAPI from "../../src/actions/news";
+import Section1 from "../../src/components/sections/Section1";
+import Section2 from "../../src/components/sections/Section2";
 import MainLayout from "../../src/layouts/MainLayout";
+import WidthLayout from "../../src/layouts/WidthLayout";
+import DanhMucItem from "../../src/models/DanhMucItem";
+import TinTucItem from "../../src/models/TinTucItem";
 
-const DanhMuc = () => {
-  // const router = useRouter();
-  // const queryClient = useQueryClient();
-  // const categories: any = queryClient.getQueryData(["danh-muc"]);
+interface DanhMucProps {
+  data: TinTucItem[];
+}
 
-  // const { id } = router.query;
+const DanhMuc: FC<DanhMucProps> = ({ data }) => {
+  const section2 = useMemo(() => {
+    const views = data.sort((a: any, b: any) => b.view - a.view);
 
-  // useEffect(() => {
-  //   handleOnTop();
-  // }, [id]);
-
-  // const title = useMemo(() => {
-  //   let initial = "Thời sự";
-  //   if (categories) {
-  //     const currentCategory = categories.data.data.find(
-  //       (item: CategoryItem, index: number) =>
-  //         slugify(item.name.toLowerCase()) === id
-  //     );
-  //     if (currentCategory) {
-  //       initial = currentCategory.name;
-  //     }
-  //   }
-  //   return initial;
-  // }, [id, categories]);
+    return views.slice(0, 5) || [];
+  }, [data]);
 
   return (
     <>
       <MainLayout>
-        abc
-        {/* <Grid container px={2} py={3} spacing={2}>
-          <Grid item xs={12} md={12} lg={8}>
-            <Typography
-              fontSize={22}
-              fontWeight={600}
-              textTransform={"capitalize"}
-              mb={2}
-              sx={{
-                "&::after": {
-                  content: '""',
-                  width: "60px",
-                  height: "5px",
-                  display: "block",
-                  bgcolor: secondary.main,
-                  top: 0,
-                  borderRadius: "10px",
-                },
-              }}
-            >
-              {title}
-            </Typography>
-            <CardNewsBig {...data[0]} />
-            <Grid container spacing={2} mt={1}>
-              {data.map((item: NewsBaseItem, index: number) => {
-                if (index > 0 && index <= data.length / 2 + 3) {
-                  console.log(item.href);
-                  return (
-                    <Grid item key={index} xs={12} md={4}>
-                      <CardNewsChild {...item} />
-                    </Grid>
-                  );
-                }
-              })}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} md={12} lg={4}>
-            {data.map((item: NewsBaseItem, index: number) => {
-              if (index > data.length / 2 + 3) {
-                return <CardNews key={index} {...item} />;
-              }
-            })}
-          </Grid>
-        </Grid>
-        <Pagination
-          sx={{
-            pb: "50px",
-            mt: 2,
-            ".css-wjh20t-MuiPagination-ul": {
-              justifyContent: "center",
-            },
-          }}
-          siblingCount={-1}
-          size='large'
-          count={10}
-          color='secondary'
-          shape='rounded'
-        /> */}
-        Detail
+        <WidthLayout>
+          <Section1 data={data} />
+          <Section2 data={section2} />
+          <Box pb={10}></Box>
+        </WidthLayout>
       </MainLayout>
     </>
   );
 };
 
 export default DanhMuc;
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id as string;
+  const news = await newsAPI.getNews();
+
+  const news2 = news.filter((item: TinTucItem) => item.status === true);
+
+  const newsData = news2.filter(
+    (item: TinTucItem) => item.category.slug === id
+  );
+
+  return {
+    props: {
+      data: newsData,
+    },
+    revalidate: 60,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categories = await categoryAPI.getCategory();
+
+  const paths = categories.map((item: DanhMucItem) => ({
+    params: { id: item.slug },
+  }));
+
+  return {
+    paths: paths,
+    fallback: "blocking",
+  };
+};

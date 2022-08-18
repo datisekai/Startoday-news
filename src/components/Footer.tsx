@@ -3,7 +3,9 @@ import EmailIcon from "@mui/icons-material/Email";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import categoryAPI from "../actions/category";
+import DanhMucItem from "../models/DanhMucItem";
 import { primary } from "../theme/themeColors";
 
 const Footer = () => {
@@ -12,7 +14,7 @@ const Footer = () => {
     <Box>
       <Grid
         container
-        sx={{ borderTop: `5px solid ${primary[100]}`, px: 2, py: 3 }}
+        sx={{ borderTop: `5px solid ${primary[300]}`, px: 2, py: 3 }}
       >
         <Grid item xs={12} md={8}>
           <Grid
@@ -20,19 +22,33 @@ const Footer = () => {
             spacing={1}
             sx={{
               borderRight: {
-                md: `1px dotted ${primary[200]}`,
+                md: `1px dotted ${primary[300]}`,
                 xs: "none",
               },
             }}
           >
-            {/* {data &&
-              data.map((item: CategoryItem, index: number) => (
+            <Grid item xs={6} md={3}>
+              <Link href={`/`}>
+                <Button
+                  variant='text'
+                  sx={{
+                    color: primary[400],
+                    fontWeight: "500",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Tất cả
+                </Button>
+              </Link>
+            </Grid>
+            {data &&
+              data.map((item: DanhMucItem, index: number) => (
                 <Grid item xs={6} md={3} key={index}>
-                  <Link href={`/danh-muc/${slugify(item.name)}`}>
+                  <Link href={`/danh-muc/${item.slug}`}>
                     <Button
                       variant='text'
                       sx={{
-                        color: primary[200],
+                        color: primary[400],
                         fontWeight: "500",
                         whiteSpace: "nowrap",
                       }}
@@ -41,7 +57,7 @@ const Footer = () => {
                     </Button>
                   </Link>
                 </Grid>
-              ))} */}
+              ))}
           </Grid>
         </Grid>
         <Grid
@@ -83,7 +99,7 @@ const Footer = () => {
       <Stack
         direction={"row"}
         spacing={2}
-        sx={{ borderTop: `2px dotted ${primary[200]}`, py: 2, px: 2 }}
+        sx={{ borderTop: `2px dotted ${primary[400]}`, py: 2, px: 2 }}
         alignItems='center'
       >
         <Typography fontSize={16}>Báo điện tử</Typography>

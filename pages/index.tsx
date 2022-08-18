@@ -1,82 +1,74 @@
-import { Box, Grid, Pagination, Typography } from "@mui/material";
-import axios from "axios";
+import { Box } from "@mui/material";
 import type { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import baseAPI from "../src/actions/base";
-import axiosClient from "../src/axios/axiosClient";
-import CardNews from "../src/components/Card/CardNews";
-import CardNewsBig from "../src/components/Card/CardNewsBig";
-import CardNewsChild from "../src/components/Card/CardNewsChild";
-import { API_URL } from "../src/config";
+import { useMemo } from "react";
+import categoryAPI from "../src/actions/category";
+import newsAPI from "../src/actions/news";
+import Section1 from "../src/components/sections/Section1";
+import Section2 from "../src/components/sections/Section2";
+import Section3 from "../src/components/sections/Section3";
 import MainLayout from "../src/layouts/MainLayout";
-import NewsBaseItem from "../src/models/NewsBaseItem";
-import { secondary } from "../src/theme/themeColors";
-import styles from "../styles/Home.module.css";
+import WidthLayout from "../src/layouts/WidthLayout";
+import DanhMucItem from "../src/models/DanhMucItem";
+import TinTucItem from "../src/models/TinTucItem";
 
-const Home: NextPage = () => {
+interface HomeProps {
+  data: TinTucItem[];
+  categories: DanhMucItem[];
+}
+
+const Home: NextPage<HomeProps> = ({ data, categories }) => {
+  const section2 = useMemo(() => {
+    const views = data.sort((a: any, b: any) => b.view - a.view);
+
+    return views.slice(0, 5) || [];
+  }, [data]);
+
+  const section3 = useMemo(() => {
+    const randomCategory = () => {
+      const i = Math.floor(Math.random() * categories.length);
+
+      return categories[i];
+    };
+
+    const getRandomCategory: any = () => {
+      const category1 = randomCategory();
+      const category2 = randomCategory();
+      if (category1._id === category2._id) {
+        return getRandomCategory();
+      }
+      return { category1, category2 };
+    };
+
+    const { category1, category2 } = getRandomCategory();
+
+    const news1 = data.filter(
+      (item: TinTucItem) => item.category._id === category1._id
+    );
+    const news2 = data.filter(
+      (item: TinTucItem) => item.category._id === category2._id
+    );
+
+    return {
+      news1: {
+        data: news1,
+        category: category1,
+      },
+      news2: {
+        data: news2,
+        category: category2,
+      },
+    };
+  }, [data]);
+
   return (
     <>
       <MainLayout>
-        {/* <Grid container px={2} py={3} spacing={2}>
-          <Grid item xs={12} md={12} lg={8}>
-            <Typography
-              fontSize={22}
-              fontWeight={600}
-              textTransform={"capitalize"}
-              mb={2}
-              sx={{
-                "&::after": {
-                  content: '""',
-                  width: "60px",
-                  height: "5px",
-                  display: "block",
-                  bgcolor: secondary.main,
-                  top: 0,
-                  borderRadius: "10px",
-                },
-              }}
-            >
-              Thời sự
-            </Typography>
-            <CardNewsBig {...chinhTri[0]} />
-            <Grid container spacing={2} mt={1}>
-              {chinhTri.map((item: NewsBaseItem, index: number) => {
-                if (index > 0 && index <= chinhTri.length / 2 + 3) {
-                  return (
-                    <Grid item key={index} xs={12} md={4}>
-                      <CardNewsChild {...item} />
-                    </Grid>
-                  );
-                }
-              })}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} md={12} lg={4}>
-            {chinhTri.map((item: NewsBaseItem, index: number) => {
-              if (index > chinhTri.length / 2 + 3) {
-                return <CardNews key={index} {...item} />;
-              }
-            })}
-          </Grid>
-        </Grid>
-        <Pagination
-          sx={{
-            pb: "50px",
-            mt: 2,
-            ".css-wjh20t-MuiPagination-ul": {
-              justifyContent: "center",
-            },
-          }}
-          siblingCount={-1}
-          size='large'
-          count={10}
-          color='secondary'
-          shape='rounded'
-        /> */}
-        Home
+        <WidthLayout>
+          <Section1 data={data} />
+          <Section2 data={section2} />
+          <Section3 data={section3} />
+          <Box pb={10}></Box>
+        </WidthLayout>
       </MainLayout>
     </>
   );
@@ -85,11 +77,14 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const dataChinhTri = await baseAPI.getData("thoi-su/chinh-tri");
+  const news = await newsAPI.getNews();
+  const categories = await categoryAPI.getCategory();
 
-  //https://startoday123.herokuapp.com
   return {
-    props: {},
+    props: {
+      data: news.filter((item: TinTucItem) => item.status === true),
+      categories,
+    },
     revalidate: 60,
   };
 };

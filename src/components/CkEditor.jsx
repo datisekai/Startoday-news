@@ -2,7 +2,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Grid } from "@mui/material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { CloudinaryUnsigned } from "puff-puff/CKEditor";
 import { useEffect, useState } from "react";
@@ -10,21 +10,23 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import newsAPI from "../actions/news";
+import Spinner from "./Loading/Spinner";
 import RenderForm from "./RenderForm";
 
-const CkEditor = ({ forms, id, data }) => {
+const CkEditor = ({ forms, id }) => {
   const [file, setFile] = useState();
   const [html, setHtml] = useState("");
   const { user } = useSelector((state) => state.Auth);
   const queryClient = useQueryClient();
-  const news = queryClient.getQueryData(["tin-tuc"]);
+  // const news = queryClient.getQueryData(["tin-tuc"]);
+  const { data: news } = useQuery(["tin-tuc"], newsAPI.getNews);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!news) {
-      router.push("/admin/tin-tuc");
+  const { data, isLoading } = useQuery([`chi-tiet-news`, id], () => {
+    if (id && id !== "them") {
+      return newsAPI.getDetailNews(id.toString());
     }
-  }, [news]);
+  });
 
   function imagePluginFactory(editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
@@ -158,6 +160,10 @@ const CkEditor = ({ forms, id, data }) => {
       _id: data._id,
     });
   };
+
+  if (loadingAdd || loadingUpdate) {
+    return <Spinner />;
+  }
 
   return (
     <>
