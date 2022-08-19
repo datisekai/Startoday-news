@@ -68,6 +68,8 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
         description='Thông tin nhanh và chính xác được cập nhật hàng giờ. Đọc báo tin tức online Việt Nam'
         image='https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
         title='Startoday - Báo tiếng Việt nhiều người xem nhất'
+        advense='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9593230041049490"
+        crossorigin="anonymous"></script>'
       />
       <MainLayout>
         <Title title='Startoday - Báo tiếng Việt nhiều người xem nhất' />

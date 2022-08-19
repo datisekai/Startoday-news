@@ -32,6 +32,8 @@ const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
         }
         description={data.description}
         title={data.title}
+        advense='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9593230041049490"
+        crossorigin="anonymous"></script>'
       />
       <MainLayout>
         <Title title={data.title} />
