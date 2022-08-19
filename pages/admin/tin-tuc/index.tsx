@@ -70,7 +70,7 @@ const TinTuc = () => {
     {
       field: "createdAt",
       headerName: "Ngày tạo",
-      width: 150,
+      width: 100,
       renderCell: (cellValues: any) => (
         <Typography>
           {dayjs(cellValues.row.createdAt).format("DD/MM/YYYY")}
@@ -80,7 +80,7 @@ const TinTuc = () => {
     {
       field: "updatedAt",
       headerName: "Ngày update",
-      width: 150,
+      width: 100,
       renderCell: (cellValues: any) => (
         <Typography>
           {dayjs(cellValues.row.updatedAt).format("DD/MM/YYYY")}

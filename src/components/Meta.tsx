@@ -10,8 +10,6 @@ interface MetaProps {
 }
 
 const Meta: FC<MetaProps> = ({ title, description, image, advense }) => {
-  const router = useRouter();
-
   return (
     <Head>
       <title>{title}</title>
@@ -27,7 +25,7 @@ const Meta: FC<MetaProps> = ({ title, description, image, advense }) => {
       <meta property='twitter:title' content={title} />
       <meta property='twitter:description' content={description} />
       <meta property='twitter:image' content={image} />
-      {advense}
+      {advense && <script async src={advense} crossOrigin='anonymous'></script>}
     </Head>
   );
 };
