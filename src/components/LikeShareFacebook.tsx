@@ -38,7 +38,7 @@ const LikeShareFacebook: FC<LikeShareFacebookProps> = ({ href }) => {
     <>
       <div
         className='fb-like'
-        data-href={`https://developers.facebook.com/docs/plugins${href}`}
+        data-href={`${process.env.NEXT_PUBLIC_CLIENT_URL}${href}`}
         data-width=''
         data-layout='standard'
         data-action='like'
