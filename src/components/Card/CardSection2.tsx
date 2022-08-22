@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { FC, useMemo } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import TinTucItem from "../../models/TinTucItem";
+import { secondary } from "../../theme/themeColors";
 import { calculateCreatedTime } from "../../utils/formatTime";
 import styleLineClamp from "../../utils/styleLineClamp";
 
@@ -12,19 +13,18 @@ const CardSection2: FC<TinTucItem> = ({
   createdAt,
   avatar,
   title,
-  view,
   slug,
 }) => {
-  const viewCurrent = useMemo(() => {
-    return new Intl.NumberFormat("en-US", {
-      notation: "compact",
-      compactDisplay: "short",
-    }).format(view);
-  }, [view]);
+  // const viewCurrent = useMemo(() => {
+  //   return new Intl.NumberFormat("en-US", {
+  //     notation: "compact",
+  //     compactDisplay: "short",
+  //   }).format(view);
+  // }, [view]);
   return (
     <Card>
       <Link href={`/${slug}`}>
-        <Stack spacing={1} sx={{ cursor: "pointer" }}>
+        <Stack spacing={1} sx={{ cursor: "pointer", py: 1 }}>
           <LazyLoadImage
             alt={title}
             height={"100%"}
@@ -40,11 +40,21 @@ const CardSection2: FC<TinTucItem> = ({
             px={1}
             fontWeight={500}
             fontSize={16}
-            sx={styleLineClamp(2)}
+            component={"h2"}
+            sx={{
+              ...styleLineClamp(2),
+              "&:hover": {
+                color: secondary.main,
+                transition: "0,3s",
+              },
+            }}
           >
             {title}
           </Typography>
-
+          <Typography px={1} color='primary.400' sx={styleLineClamp(2)}>
+            {description}
+          </Typography>
+          {/* 
           <Stack
             direction={"row"}
             justifyContent='space-between'
@@ -52,9 +62,11 @@ const CardSection2: FC<TinTucItem> = ({
             px={1}
             pb={1}
           >
-            <Typography>{viewCurrent} lượt xem</Typography>
-            <Typography>{calculateCreatedTime(createdAt || "")}</Typography>
-          </Stack>
+            <Typography color='primary.400'>{viewCurrent} lượt xem</Typography>
+            <Typography color='primary.400'>
+              {calculateCreatedTime(createdAt || "")}
+            </Typography>
+          </Stack> */}
         </Stack>
       </Link>
     </Card>

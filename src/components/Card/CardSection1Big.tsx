@@ -10,6 +10,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import TinTucItem from "../../models/TinTucItem";
+import { primary, secondary } from "../../theme/themeColors";
 import styleLineClamp from "../../utils/styleLineClamp";
 
 const CardSection1Big: FC<TinTucItem> = ({
@@ -72,7 +73,14 @@ const CardSection1Big: FC<TinTucItem> = ({
               color='primary.100'
               fontWeight={500}
               fontSize={{ md: 22, xs: 18 }}
-              sx={styleLineClamp(2)}
+              component={"h2"}
+              sx={{
+                ...styleLineClamp(2),
+                "&:hover": {
+                  color: secondary.main,
+                  transition: "0.3s",
+                },
+              }}
             >
               {title}
             </Typography>

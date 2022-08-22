@@ -1,6 +1,7 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { fontWeight } from "@mui/system";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -41,10 +42,9 @@ const Categories = () => {
           whiteSpace={"nowrap"}
           textOverflow='ellipsis'
           component={"p"}
-        >{`${date.getDate()}, ${new Intl.DateTimeFormat(
-          "en-US",
-          options
-        ).format(date)}, ${date.getFullYear()}`}</Typography>
+        >
+          {dayjs().format("MMMM D, YYYY")}
+        </Typography>
       </Box>
       <Stack direction={"row"} pl={2} flexWrap='wrap'>
         <Link href={`/`}>

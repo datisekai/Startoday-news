@@ -27,15 +27,17 @@ const SidebarAdmin = ({ display }: any) => {
         transition: "width 1s",
       }}
     >
-      <Typography
-        fontWeight={600}
-        fontSize={18}
-        mt={4}
-        textAlign='center'
-        color='secondary'
-      >
-        StarToday
-      </Typography>
+      <Link href='/'>
+        <Typography
+          fontWeight={600}
+          fontSize={18}
+          mt={4}
+          textAlign='center'
+          color='secondary'
+        >
+          StarToday
+        </Typography>
+      </Link>
       <Stack spacing={2} mt={4}>
         {sidebar.map((item: sidebarItem, index: number) => (
           <SidebarItem {...item} key={index} />

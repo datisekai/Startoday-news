@@ -4,6 +4,7 @@ import { FC, useMemo } from "react";
 import slugify from "slugify";
 import categoryAPI from "../../src/actions/category";
 import newsAPI from "../../src/actions/news";
+import CommentFacebook from "../../src/components/CommentFacebook";
 import Meta from "../../src/components/Meta";
 import Section1 from "../../src/components/sections/Section1";
 import Section2 from "../../src/components/sections/Section2";
@@ -15,9 +16,10 @@ import TinTucItem from "../../src/models/TinTucItem";
 
 interface DanhMucProps {
   data: TinTucItem[];
+  params: string;
 }
 
-const DanhMuc: FC<DanhMucProps> = ({ data }) => {
+const DanhMuc: FC<DanhMucProps> = ({ data, params }) => {
   const section2 = useMemo(() => {
     const views = data.sort((a: any, b: any) => b.view - a.view);
 
@@ -30,13 +32,16 @@ const DanhMuc: FC<DanhMucProps> = ({ data }) => {
         description='Danh mục'
         title='Startoday - Danh mục'
         image='https://images.unsplash.com/photo-1586339949216-35c2747cc36d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-        advense={process.env.NEXT_PUBLIC_ADVENSE_URL}
+        adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />
       <MainLayout>
         <Title title={"Danh mục"} />
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />
+          <Box mt={5}>
+            <CommentFacebook href={`/startoday-${params}`} />
+          </Box>
           <Box pb={10}></Box>
         </WidthLayout>
       </MainLayout>
@@ -59,6 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       data: newsData,
+      params: id,
     },
     revalidate: 60,
   };

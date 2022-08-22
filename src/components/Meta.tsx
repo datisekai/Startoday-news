@@ -6,10 +6,10 @@ interface MetaProps {
   title: string;
   description: string;
   image: string;
-  advense?: any;
+  adsense?: any;
 }
 
-const Meta: FC<MetaProps> = ({ title, description, image, advense }) => {
+const Meta: FC<MetaProps> = ({ title, description, image, adsense }) => {
   return (
     <Head>
       <title>{title}</title>
@@ -25,7 +25,14 @@ const Meta: FC<MetaProps> = ({ title, description, image, advense }) => {
       <meta property='twitter:title' content={title} />
       <meta property='twitter:description' content={description} />
       <meta property='twitter:image' content={image} />
-      {advense && <script async src={advense} crossOrigin='anonymous'></script>}
+      <script
+        async
+        defer
+        crossOrigin='anonymous'
+        src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=865699914335033&autoLogAppEvents=1'
+        nonce='Dp8F1UgF'
+      ></script>
+      {adsense && <script async src={adsense} crossOrigin='anonymous'></script>}
     </Head>
   );
 };

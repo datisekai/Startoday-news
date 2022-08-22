@@ -3,6 +3,7 @@ import type { GetStaticProps, NextPage } from "next";
 import { useMemo } from "react";
 import categoryAPI from "../src/actions/category";
 import newsAPI from "../src/actions/news";
+import CommentFacebook from "../src/components/CommentFacebook";
 import Meta from "../src/components/Meta";
 import Section1 from "../src/components/sections/Section1";
 import Section2 from "../src/components/sections/Section2";
@@ -68,14 +69,19 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
         description='Thông tin nhanh và chính xác được cập nhật hàng giờ. Đọc báo tin tức online Việt Nam'
         image='https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
         title='Startoday - Báo tiếng Việt nhiều người xem nhất'
-        advense={process.env.NEXT_PUBLIC_ADVENSE_URL}
+        adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />
       <MainLayout>
         <Title title='Startoday - Báo tiếng Việt nhiều người xem nhất' />
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />
-          <Section3 data={section3} />
+          <div data-aos='fade-up'>
+            <Section3 data={section3} />
+          </div>
+          <Box mt={5}>
+            <CommentFacebook href={"/startoday-home"} />
+          </Box>
           <Box pb={10}></Box>
         </WidthLayout>
       </MainLayout>

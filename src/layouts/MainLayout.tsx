@@ -14,6 +14,7 @@ const MainLayout: FC<Props> = ({ children }) => {
       <OnTop />
       <Box sx={{ minHeight: "100vh" }}>{children}</Box>
       <Footer />
+      <div id='fb-root'></div>
     </Box>
   );
 };

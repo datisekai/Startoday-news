@@ -2,8 +2,11 @@ import { Box, Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
 import newsAPI from "../src/actions/news";
+import CommentFacebook from "../src/components/CommentFacebook";
+import LikeShareFacebook from "../src/components/LikeShareFacebook";
 import Meta from "../src/components/Meta";
 import Section4 from "../src/components/sections/Section4";
 import Title from "../src/components/Title";
@@ -23,6 +26,9 @@ const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
     };
     increase();
   }, []);
+
+  const router = useRouter();
+
   return (
     <>
       <Meta
@@ -32,7 +38,7 @@ const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
         }
         description={data.description}
         title={data.title}
-        advense={process.env.NEXT_PUBLIC_ADVENSE_URL}
+        adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />
       <MainLayout>
         <Title title={data.title} />
@@ -56,7 +62,11 @@ const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
                 {dayjs(data.createdAt).format("MMMM D, YYYY")}
               </Typography>
             </Stack>
-            <Typography fontWeight={500} fontSize={{ md: 28, xs: 24 }}>
+            <Typography
+              fontWeight={500}
+              component='h1'
+              fontSize={{ md: 28, xs: 24 }}
+            >
               {data.title}
             </Typography>
             <Typography sx={{ lineHeight: 2, fontSize: 18 }}>
@@ -65,6 +75,8 @@ const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
             <Box sx={{ lineHeight: 2, fontSize: 18 }}>
               <div dangerouslySetInnerHTML={{ __html: data.html }}></div>
             </Box>
+            <LikeShareFacebook href={router.asPath} />
+            <CommentFacebook href={router.asPath} />
             <Box>
               <Section4 data={similars} />
             </Box>
@@ -87,9 +99,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       data: data,
-      similars: similars.filter(
-        (item: TinTucItem) => item._id !== data._id && item.status === true
-      ),
+      similars: similars
+        .filter(
+          (item: TinTucItem) => item._id !== data._id && item.status === true
+        )
+        .slice(0, 5),
     },
     revalidate: 60,
   };

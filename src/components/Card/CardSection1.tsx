@@ -11,6 +11,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import TinTucItem from "../../models/TinTucItem";
+import { primary, secondary } from "../../theme/themeColors";
 import styleLineClamp from "../../utils/styleLineClamp";
 
 const CardSection1: FC<TinTucItem> = ({
@@ -41,7 +42,18 @@ const CardSection1: FC<TinTucItem> = ({
           <Link href={`/${slug}`}>
             <Stack spacing={1} py={1} sx={{ cursor: "pointer" }}>
               <Typography>{dayjs(createdAt).format("MMMM D, YYYY")}</Typography>
-              <Typography fontWeight={500} fontSize={16} sx={styleLineClamp(2)}>
+              <Typography
+                fontWeight={500}
+                fontSize={16}
+                component={"h2"}
+                sx={{
+                  ...styleLineClamp(2),
+                  "&:hover": {
+                    color: secondary.main,
+                    transition: "0,3s",
+                  },
+                }}
+              >
                 {title}
               </Typography>
             </Stack>

@@ -4,12 +4,16 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import categoryAPI from "../actions/category";
 import DanhMucItem from "../models/DanhMucItem";
 import { primary } from "../theme/themeColors";
 
 const Footer = () => {
   const { data, isLoading } = useQuery(["danh-muc"], categoryAPI.getCategory);
+  const router = useRouter();
+
+  const { id } = router.query;
   return (
     <Box>
       <Grid
@@ -32,7 +36,7 @@ const Footer = () => {
                 <Button
                   variant='text'
                   sx={{
-                    color: primary[400],
+                    color: !id ? primary.main : primary[500],
                     fontWeight: "500",
                     whiteSpace: "nowrap",
                   }}
@@ -48,7 +52,7 @@ const Footer = () => {
                     <Button
                       variant='text'
                       sx={{
-                        color: primary[400],
+                        color: id === item.slug ? primary.main : primary[500],
                         fontWeight: "500",
                         whiteSpace: "nowrap",
                       }}
