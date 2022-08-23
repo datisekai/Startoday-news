@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React, { FC, useEffect } from "react";
 
 interface LikeShareFacebookProps {
@@ -35,17 +36,17 @@ const LikeShareFacebook: FC<LikeShareFacebookProps> = ({ href }) => {
     initFacebookSDK();
   }, []);
   return (
-    <>
+    <Box mb={2}>
       <div
         className='fb-like'
         data-href={`${process.env.NEXT_PUBLIC_CLIENT_URL}${href}`}
         data-width=''
-        data-layout='standard'
+        data-layout='button_count'
         data-action='like'
         data-size='small'
         data-share='true'
       ></div>
-    </>
+    </Box>
   );
 };
 
