@@ -9,10 +9,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { primary } from "../theme/themeColors";
+import { primary } from "../../theme/themeColors";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import { useDispatch } from "react-redux";
-import { clearAuth } from "../redux/slices/AuthSlice";
+import { clearAuth } from "../../redux/slices/AuthSlice";
 import { useRouter } from "next/router";
 
 const HeaderAdmin = ({ handleSidebar }: any) => {

@@ -72,7 +72,6 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
         adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />
       <MainLayout>
-        <Title title='Startoday - Báo tiếng Việt nhiều người xem nhất' />
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />

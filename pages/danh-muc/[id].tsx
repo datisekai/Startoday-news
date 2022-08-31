@@ -35,7 +35,6 @@ const DanhMuc: FC<DanhMucProps> = ({ data, params }) => {
         adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />
       <MainLayout>
-        <Title title={"Danh mục"} />
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />

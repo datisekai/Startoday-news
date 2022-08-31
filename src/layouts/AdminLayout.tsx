@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FlexBox from "../components/FlexBox";
-import HeaderAdmin from "../components/HeaderAdmin";
+import HeaderAdmin from "../components/Header/HeaderAdmin";
 import { IsBrowser } from "../components/IsBrowser";
 import Spinner from "../components/Loading/Spinner";
 import SidebarAdmin from "../components/SidebarAdmin";

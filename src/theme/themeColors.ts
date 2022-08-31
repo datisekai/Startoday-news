@@ -36,7 +36,7 @@ export const primary = {
   700: "#131215",
   800: "#131215",
   900: "#000", // background header
-  main: "#131215",
+  main: "#D82620",
 };
 
 export const secondary = {
