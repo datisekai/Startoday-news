@@ -75,9 +75,7 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />
-          <div data-aos='fade-up'>
-            <Section3 data={section3} />
-          </div>
+          <Section3 data={section3} />
           <Box mt={5}>
             <CommentFacebook href={"/startoday-home"} />
           </Box>

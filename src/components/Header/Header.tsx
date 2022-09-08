@@ -1,27 +1,23 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import FlexBox from "../FlexBox";
-import MenuIcon from "@mui/icons-material/Menu";
-import WidthLayout from "../../layouts/WidthLayout";
-import { primary } from "../../theme/themeColors";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import Link from "next/link";
-import MDrawer from "../MDrawer";
-import TopHeader from "./TopHeader";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import WidthLayout from "../../layouts/WidthLayout";
+import FlexBox from "../FlexBox";
 import HeaderMobile from "./HeaderMobile";
+import TopHeader from "./TopHeader";
 
 const Header = () => {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  const handleSearch = () => {
+    router.push(`/tim-kiem?keywords=${search}`);
+    setSearch("");
+  };
+
   return (
     <>
       <Box
@@ -35,28 +31,34 @@ const Header = () => {
         <TopHeader />
         <Box
           sx={{ backgroundImage: "linear-gradient(to left,#9f041b,#e32)" }}
-          height={48}
+          height={56}
         >
           <WidthLayout>
             <FlexBox justifyContent={"space-between"} alignItems='center'>
-              <LazyLoadImage
-                alt={"Logo"}
-                height={"100%"}
-                src={
-                  "https://static.mediacdn.vn/thumb_w/150/tuoitre/web_images/logo_tuoitrecuoi-01.png"
-                } // use normal <img> attributes as props
-                width={"100%"}
-                style={{
-                  objectFit: "cover",
-                  display: "block",
-                  width: 100,
-                  height: 48,
-                }}
-              />
+              <Link href='/'>
+                <LazyLoadImage
+                  alt={"Logo"}
+                  height={"100%"}
+                  src={"/images/logo7.png"} // use normal <img> attributes as props
+                  width={"100%"}
+                  style={{
+                    display: "block",
+                    width: 140,
+                    height: 55,
+                  }}
+                />
+              </Link>
               <TextField
                 id='outlined-basic'
                 size='small'
                 placeholder='Tìm kiếm tin tức'
+                value={search}
+                onKeyUp={(e: any) => {
+                  if (e.keyCode === 13) {
+                    handleSearch();
+                  }
+                }}
+                onChange={(e: any) => setSearch(e.target.value)}
                 sx={{
                   width: "40%",
                   input: {
@@ -71,7 +73,9 @@ const Header = () => {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
-                      <SearchIcon />
+                      <IconButton onClick={handleSearch}>
+                        <SearchIcon />
+                      </IconButton>
                     </InputAdornment>
                   ),
                 }}

@@ -1,9 +1,8 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import WidthLayout from "../layouts/WidthLayout";
 import { Box } from "@mui/material";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import WidthLayout from "../layouts/WidthLayout";
 
 const images = [
   "/images/onthi.jpg",

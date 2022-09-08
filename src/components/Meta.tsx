@@ -32,7 +32,7 @@ const Meta: FC<MetaProps> = ({ title, description, image, adsense }) => {
         src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=865699914335033&autoLogAppEvents=1'
         nonce='Dp8F1UgF'
       ></script>
-      {adsense && <script async src={adsense} crossOrigin='anonymous'></script>}
+      {/* {adsense && <script async src={adsense} crossOrigin='anonymous'></script>} */}
     </Head>
   );
 };

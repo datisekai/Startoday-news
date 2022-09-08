@@ -6,6 +6,7 @@ import FlexBox from "../FlexBox";
 import LazyImage from "../LazyImage";
 import CallIcon from "@mui/icons-material/Call";
 import PersonIcon from "@mui/icons-material/Person";
+import Link from "next/link";
 
 const TopHeader = () => {
   return (
@@ -21,13 +22,13 @@ const TopHeader = () => {
           },
         }}
       >
-        <Stack direction={"row"} spacing={0.5}>
-          {[1, 2, 3, 4].map((item: any) => (
+        <Stack direction={"row"} spacing={2}>
+          {[1, 2].map((item: any) => (
             <LazyLoadImage
               key={item}
               alt={"Logo"}
               height={"100%"}
-              src={"https://static.mediacdn.vn/tuoitre/web_images/LogoTTTV.png"} // use normal <img> attributes as props
+              src={"/images/logo5.png"} // use normal <img> attributes as props
               width={"100%"}
               style={{
                 objectFit: "cover",
@@ -46,13 +47,15 @@ const TopHeader = () => {
           <Typography fontSize={13}>Đặt báo</Typography>
           <Typography fontSize={13}>Quảng cáo</Typography>
           <Stack direction={"row"} spacing={0.5}>
-            <Button
-              size='small'
-              variant='text'
-              startIcon={<PersonIcon fontSize='small' />}
-            >
-              Đăng nhập
-            </Button>
+            <Link href='/dang-nhap'>
+              <Button
+                size='small'
+                variant='text'
+                startIcon={<PersonIcon fontSize='small' />}
+              >
+                Đăng nhập
+              </Button>
+            </Link>
             <Button size='small' variant='text'>
               Đăng ký
             </Button>

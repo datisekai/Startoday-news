@@ -1,4 +1,4 @@
-import { IconButton, Stack } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import React, { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -8,12 +8,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import MDrawer from "../MDrawer";
 import SearchMobile from "./SearchMobile";
+import Link from "next/link";
 
 const HeaderMobile = () => {
   const [navbar, setNavbar] = useState(false);
   const [search, setSearch] = useState(false);
   return (
     <>
+      <Box sx={{ height: 47 }}></Box>
       <Stack
         direction={"row"}
         px={2}
@@ -30,18 +32,19 @@ const HeaderMobile = () => {
           right: 0,
         }}
       >
-        <LazyLoadImage
-          alt={"Logo"}
-          height={"100%"}
-          src={"https://static.mediacdn.vn/tuoitre/web_images/LogoTTTV.png"} // use normal <img> attributes as props
-          width={"100%"}
-          style={{
-            objectFit: "cover",
-            display: "block",
-            width: 80,
-            height: 26,
-          }}
-        />
+        <Link href='/'>
+          <LazyLoadImage
+            alt={"Logo"}
+            height={"100%"}
+            src={"/images/logo6.png"} // use normal <img> attributes as props
+            width={"100%"}
+            style={{
+              display: "block",
+              aspectRatio: "274/59",
+              width: 105,
+            }}
+          />
+        </Link>
         <Stack direction='row' spacing={0}>
           <IconButton>
             <YouTubeIcon fontSize='small' />

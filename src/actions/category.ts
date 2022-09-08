@@ -1,10 +1,12 @@
 import axiosClient from "../axios/axiosClient";
 import DanhMucItem from "../models/DanhMucItem";
+import TinTucItem from "../models/TinTucItem";
 
 interface CategoryAPI {
   getCategory: () => Promise<DanhMucItem[]>;
   addCategory: (data: DanhMucItem) => Promise<DanhMucItem>;
   deleteCategory: (_ids: string[]) => any;
+  searchCategory: ({ text, category }: any) => Promise<TinTucItem[]>;
 }
 
 const categoryAPI: CategoryAPI = {
@@ -20,6 +22,13 @@ const categoryAPI: CategoryAPI = {
     return Promise.all(
       _ids.map((item: string) => axiosClient.delete(`/danh-muc?_id=${item}`))
     );
+  },
+  searchCategory: async ({ text, category }: any) => {
+    console.log(text, category);
+    const res = await axiosClient.get(
+      `/tim-kiem?text=${text}&category=${category}`
+    );
+    return res.data.data;
   },
 };
 

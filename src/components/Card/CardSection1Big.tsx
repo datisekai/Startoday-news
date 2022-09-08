@@ -22,7 +22,7 @@ const CardSection1Big: FC<TinTucItem> = ({
   slug,
 }) => {
   return (
-    <Card sx={{ position: "relative" }}>
+    <Card sx={{ position: "relative", height: "100%" }}>
       <LazyLoadImage
         alt={title}
         height={"100%"}
