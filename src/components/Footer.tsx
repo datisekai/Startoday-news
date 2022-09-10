@@ -108,7 +108,7 @@ const Footer = () => {
       >
         <Typography fontSize={16}>Báo điện tử</Typography>
         <Typography fontWeight={600} fontSize={18}>
-          StarToday
+          Vietnamsao.net
         </Typography>
       </Stack>
     </Box>

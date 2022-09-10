@@ -36,7 +36,7 @@ const HeaderMobile = () => {
           <LazyLoadImage
             alt={"Logo"}
             height={"100%"}
-            src={"/images/logo6.png"} // use normal <img> attributes as props
+            src={"/images/logo9.png"} // use normal <img> attributes as props
             width={"100%"}
             style={{
               display: "block",
