@@ -26,6 +26,7 @@
     "ckeditor5": "^35.0.1",
     "dayjs": "^1.11.5",
     "next": "12.2.4",
+    "next-pwa": "^5.6.0",
     "nextjs-progressbar": "^0.0.14",
     "puff-puff": "^1.2.0",
     "puppeteer": "^16.1.0",
