@@ -2,8 +2,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { confirmAlert } from "react-confirm-alert";
 import toast from "react-hot-toast";
+import swal from "sweetalert";
 import categoryAPI from "../../../src/actions/category";
 import FlexBox from "../../../src/components/FlexBox";
 import FormCategory from "../../../src/components/Form/FormCategory";
@@ -56,18 +56,15 @@ const DanhMucAdmin = () => {
       return toast.error("Chọn danh mục cần xóa");
     }
 
-    confirmAlert({
-      title: `Thông báo`,
-      message: "Bạn có chắc chắn muốn xóa?",
-      buttons: [
-        {
-          label: "Đồng ý",
-          onClick: () => deleteCategory([_id]),
-        },
-        {
-          label: "Hủy",
-        },
-      ],
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteCategory([_id]);
+      }
     });
   };
 

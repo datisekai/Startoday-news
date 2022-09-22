@@ -8,9 +8,9 @@ import FlexBox from "../../../src/components/FlexBox";
 import MDataGrid from "../../../src/components/MDataGrid";
 import AdminLayout from "../../../src/layouts/AdminLayout";
 import NguoiDungItem from "../../../src/models/NguoiDungItem";
-import { confirmAlert } from "react-confirm-alert";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
+import swal from "sweetalert";
 
 const NguoiDung = () => {
   const queryClient = useQueryClient();
@@ -56,18 +56,15 @@ const NguoiDung = () => {
       return toast.error("Chọn người dùng cần xóa");
     }
 
-    confirmAlert({
-      title: `Thông báo`,
-      message: "Bạn có chắc chắn muốn xóa?",
-      buttons: [
-        {
-          label: "Đồng ý",
-          onClick: () => deleteUser([_id]),
-        },
-        {
-          label: "Hủy",
-        },
-      ],
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteUser([_id]);
+      }
     });
   };
 

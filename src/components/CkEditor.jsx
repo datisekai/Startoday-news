@@ -55,6 +55,7 @@ const CkEditor = ({ forms, id }) => {
       status: true,
       category: "",
       description: "",
+      slug: "",
     },
   });
 
@@ -64,6 +65,7 @@ const CkEditor = ({ forms, id }) => {
       setValue("description", data.description);
       setValue("status", data.status);
       setValue("category", data.category._id);
+      setValue("slug", data.slug);
       setFile({ preview: data.avatar });
       setHtml(data.html);
     }

@@ -44,6 +44,12 @@ const XuLyTinTuc = () => {
       },
     },
     {
+      type: "textfield",
+      name: "slug",
+      label: "URL",
+      rules: {},
+    },
+    {
       type: "select",
       name: "status",
       label: "Hiển thị",

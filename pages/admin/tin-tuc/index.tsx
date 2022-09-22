@@ -12,8 +12,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import newsAPI from "../../../src/actions/news";
 import TinTucItem from "../../../src/models/TinTucItem";
 import toast from "react-hot-toast";
-import { confirmAlert } from "react-confirm-alert";
 import dayjs from "dayjs";
+import swal from "sweetalert";
 
 const TinTuc = () => {
   const [rows, setRows] = useState([]);
@@ -140,18 +140,15 @@ const TinTuc = () => {
       return toast.error("Chọn tin cần xóa");
     }
 
-    confirmAlert({
-      title: `Thông báo`,
-      message: "Bạn có chắc chắn muốn xóa?",
-      buttons: [
-        {
-          label: "Đồng ý",
-          onClick: () => deleteNews([_id]),
-        },
-        {
-          label: "Hủy",
-        },
-      ],
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteNews([_id]);
+      }
     });
   };
 
@@ -172,7 +169,7 @@ const TinTuc = () => {
           rows={rows}
           columns={columns}
           handleSelected={handleSetSelected}
-          loading={false}
+          loading={isLoading}
         />
       </Box>
     </AdminLayout>
