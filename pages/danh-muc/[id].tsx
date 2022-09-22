@@ -29,8 +29,8 @@ const DanhMuc: FC<DanhMucProps> = ({ data, params }) => {
   return (
     <>
       <Meta
-        description='Danh mục'
-        title='Startoday - Danh mục'
+        description={data[0]?.category?.name || "Danh mục"}
+        title={`${data[0]?.category?.name || "Danh mục"} - Vietnamsao.net`}
         image='https://images.unsplash.com/photo-1586339949216-35c2747cc36d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
         adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />

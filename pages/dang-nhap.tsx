@@ -82,7 +82,7 @@ const DangNhap = () => {
   return (
     <>
       <Meta
-        title='Startoday - Đăng nhập'
+        title='Vietnamsao.net - Đăng nhập'
         description='Đăng nhập'
         image='https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
       />
@@ -94,7 +94,7 @@ const DangNhap = () => {
       >
         <Box width={{ sm: 500, xs: "90%" }}>
           <Typography fontWeight={600} textAlign='center' mb={2} fontSize={20}>
-            Wellcome to StarToday!
+            Wellcome to Vietnamsao.net
           </Typography>
           <Box
             sx={{

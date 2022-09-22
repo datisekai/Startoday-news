@@ -35,7 +35,7 @@ const SidebarAdmin = ({ display }: any) => {
           textAlign='center'
           color='secondary'
         >
-          StarToday
+          Vietnamsao
         </Typography>
       </Link>
       <Stack spacing={2} mt={4}>

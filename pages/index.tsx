@@ -68,7 +68,7 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
       <Meta
         description='Thông tin nhanh và chính xác được cập nhật hàng giờ. Đọc báo tin tức online Việt Nam'
         image='https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-        title='Startoday - Báo tiếng Việt nhiều người xem nhất'
+        title='Vietnamsao.net - Báo tiếng Việt nhiều người xem nhất'
         adsense={process.env.NEXT_PUBLIC_ADVENSE_URL}
       />
       <MainLayout>
@@ -77,7 +77,7 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
           <Section2 data={section2} />
           <Section3 data={section3} />
           <Box mt={5}>
-            <CommentFacebook href={"/startoday-home"} />
+            <CommentFacebook href={"/vietnamsao-home"} />
           </Box>
           <Box pb={10}></Box>
         </WidthLayout>
