@@ -15,6 +15,7 @@ const Meta: FC<MetaProps> = ({ title, description, image, adsense }) => {
       <title>{title}</title>
       <meta name='title' content={title} />
       <meta name='description' content={description} />
+      <meta name="google-site-verification" content="FrZhN97-g4Y7dQ1rGs311xhVxdQmof6fTYqe627-Eww" />
 
       <meta property='og:type' content='website' />
       <meta property='og:title' content={title} />
