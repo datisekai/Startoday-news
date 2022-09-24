@@ -38,9 +38,9 @@ const DanhMuc: FC<DanhMucProps> = ({ data, params }) => {
         <WidthLayout>
           <Section1 data={data} />
           <Section2 data={section2} />
-          <Box mt={5}>
+          {/* <Box mt={5}>
             <CommentFacebook href={`/startoday-${params}`} />
-          </Box>
+          </Box> */}
           <Box pb={10}></Box>
         </WidthLayout>
       </MainLayout>

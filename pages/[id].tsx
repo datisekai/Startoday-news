@@ -76,8 +76,8 @@ const NewsDetail: FC<NewsDetailProps> = ({ data, similars }) => {
             <Box sx={{ lineHeight: 2, fontSize: 18 }}>
               <div dangerouslySetInnerHTML={{ __html: data.html }}></div>
             </Box>
-            <LikeShareFacebook href={router.asPath} />
-            <CommentFacebook href={router.asPath} />
+            {/* <LikeShareFacebook href={router.asPath} />
+            <CommentFacebook href={router.asPath} /> */}
             <Box>
               <Section4 data={similars} />
             </Box>

@@ -15,7 +15,10 @@ const Meta: FC<MetaProps> = ({ title, description, image, adsense }) => {
       <title>{title}</title>
       <meta name='title' content={title} />
       <meta name='description' content={description} />
-      <meta name="google-site-verification" content="FrZhN97-g4Y7dQ1rGs311xhVxdQmof6fTYqe627-Eww" />
+      <meta
+        name='google-site-verification'
+        content='FrZhN97-g4Y7dQ1rGs311xhVxdQmof6fTYqe627-Eww'
+      />
 
       <meta property='og:type' content='website' />
       <meta property='og:title' content={title} />
@@ -26,13 +29,13 @@ const Meta: FC<MetaProps> = ({ title, description, image, adsense }) => {
       <meta property='twitter:title' content={title} />
       <meta property='twitter:description' content={description} />
       <meta property='twitter:image' content={image} />
-      <script
+      {/* <script
         async
         defer
         crossOrigin='anonymous'
         src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=865699914335033&autoLogAppEvents=1'
         nonce='Dp8F1UgF'
-      ></script>
+      ></script> */}
       {/* {adsense && <script async src={adsense} crossOrigin='anonymous'></script>} */}
     </Head>
   );

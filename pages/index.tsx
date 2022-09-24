@@ -76,9 +76,9 @@ const Home: NextPage<HomeProps> = ({ data, categories }) => {
           <Section1 data={data} />
           <Section2 data={section2} />
           <Section3 data={section3} />
-          <Box mt={5}>
+          {/* <Box mt={5}>
             <CommentFacebook href={"/vietnamsao-home"} />
-          </Box>
+          </Box> */}
           <Box pb={10}></Box>
         </WidthLayout>
       </MainLayout>
